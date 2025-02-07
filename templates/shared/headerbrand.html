@@ -1,0 +1,63 @@
+{% load static %}
+<div class="header">
+    <div class="header_row__1">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-5">
+            <ul class="header_user">
+              <li class="firstItem">
+                <a href="/account/login" id="customer_login_link">ورود</a>
+              </li>
+  
+              <li>
+                <a href="/account/register" id="customer_register_link"
+                  >ثبت نام</a
+                >
+              </li>
+  
+              <!-- <li class="checkout lastItem"><a href="/cart">Check out</a></li> -->
+            </ul>
+          </div>
+          <div class="col-sm-5">
+            <!-- CUSTOM HEADER BLOCK -->
+            <div class="custom_header1">
+              <h3>به فروشگاه ما خوش آمدید</h3>
+            </div>
+          </div>
+          <div class="col-sm-2">
+   
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container header_row__2">
+      <div class="row">
+        <div class="col-sm-7 col-md-8 col-lg-9">
+          <!-- LOGO -->
+           <div id="logo">
+            <a href="">
+              <span>مشفقی</span>
+            </a>
+           </div>
+        </div>
+        <div class="col-sm-5 col-md-4 col-lg-3">
+          <div class="header_search">
+            <form action="/search" method="get" class="search-form" role="search">
+              <input id="search-feild" type="text" name="q" placeholder="جستجو" class="hint">
+              <button id="search-submit" type="submit">
+                <!-- <i class="fa fa-search"></i> -->
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+          </div>
+          <div class="header_cart">
+            <a href="/cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-total-items"><span class="count">0</span></span>
+              <span>عدد</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
