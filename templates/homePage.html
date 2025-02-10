@@ -71,6 +71,7 @@
       </a>
   </div>
 </div>
+<!--  -->
 <div id="main" role="main">
   <div class="container">
     <div class="row sidebar_right sidebar_off">
@@ -81,27 +82,11 @@
             <div class="product-listing__index">
               <div class="product-listing">
                 <div class="row lastItem firstItem">                 
-                  <div class="product col-sm-3">
-                    <div>
-                      <div class="product_img">
-                        <a href="">
-                          <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}">
-                          <!-- <img src="{% static 'Images/showcase1_img.jpg' %}"> -->
-                        </a>
-                      </div>
-                      <div class="product_info">
-                        <div class="product_name">
-                          <a href="">گیره سوسماری</a>
-                        </div>
-                        <div class="product_price">
-                          <span class="money">
-                            1000 تومان
-                          </span>
-                        </div>
-  
-                      </div>
-                    </div>
-                  </div>
+
+                  {% include 'product_item_component.html'%}
+                  {% include 'product_item_component.html'%}
+                  {% include 'product_item_component.html'%}
+                  {% include 'product_item_component.html'%}
                 </div>
               </div>
             </div>
@@ -112,5 +97,9 @@
   </div>
 </div>
 
+<!-- nd -->
+<!-- bottom -->
+
+<!-- end of bottom -->
   {% endblock %}
 </div>

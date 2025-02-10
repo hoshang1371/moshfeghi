@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
 
     "homePage",
-    "product_price",
+    "Product",
 ]
 
 MIDDLEWARE = [
