@@ -1,32 +1,15 @@
-{% load static %}
-{% load render_partial %}
+{% load static %} {% load render_partial %}
 <!DOCTYPE html>
 <!-- <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Final//EN"> -->
-<html  lang="en" dir="rtl">
+<html lang="en" dir="rtl">
+  {% comment %} {% endcomment %} {% render_partial 'about_page_header' %}
 
-{% comment %}
-{% endcomment %}
-{% render_partial 'about_page_header' %}
+  <body>
+    <header>
+      {% comment %} {% endcomment %} {% include 'shared/headerbrand.html' %}
+    </header>
+    {% include 'shared/nav.html' %} {% comment %} {% endcomment %}
 
-
-<body>
-
-  <header>
-    
-    {% comment %}
-    {% endcomment %} 
-    {% include 'shared/headerbrand.html' %}
-    {% include 'shared/nav.html' %} 
-    
-    
-  </header>
-  {% comment %}       {% endcomment %}
-
-  
-  
-  {% block content %}
-  {% endblock %}
-
-</body>
-
+    {% block content %} {% endblock %}
+  </body>
 </html>

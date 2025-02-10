@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
 
     "homePage",
+    "product_price",
 ]
 
 MIDDLEWARE = [
@@ -114,12 +115,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+# TIME_ZONE = "UTC"
 
 USE_I18N = True
 
 USE_TZ = True
 
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
+
+USE_L10N = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -131,6 +136,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
