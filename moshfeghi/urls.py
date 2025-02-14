@@ -25,5 +25,5 @@ urlpatterns = [
     path('', home_page),
         path('about_page_header',about_page_header, 
         name='about_page_header'),
-    # path('',include('homePage.urls')),
+    path('products/',include('Product.urls')),
 ]

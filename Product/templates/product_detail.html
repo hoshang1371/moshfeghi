@@ -1,0 +1,217 @@
+{% extends 'shared/_MainLayout.html' %} {% load static %} {% block content %}
+<!-- MAIN CONTENT -->
+<div id="main" role="main">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li class="firstItem">
+        <a href="" class="homepage-link">خانه</a>
+      </li>
+      <li>
+        <a href="/collections/accessories" title="">لوازم جانبی</a>
+      </li>
+      <li class="lastItem">
+        <span class="page-title">اپل</span>
+      </li>
+    </ul>
+    <div class="row sidebar_right">
+
+      <div class="column_center col-sm-9">
+        <div id="main_content" class="">
+
+          
+          <div class="product-scope">
+            <div class="product_wrap">
+              <div class="row">
+                <div id="product_image-container" class="col-sm-5">
+         
+                  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+
+                    <div class="carousel-inner carousel-asli">
+                      <div class="carousel-item active">
+                        <img src="{% static 'Images/img_1.webp' %}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'Images/img_2.webp' %}" class="d-block w-100" alt="...">
+                      </div>
+                      <div class="carousel-item">
+                        <img src="{% static 'Images/img_3.webp' %}" class="d-block w-100" alt="...">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+                  <div class="carousel-indicators tumbline">
+                    <img src="{% static 'Images/img_1.webp' %}" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></img>
+                    <img src="{% static 'Images/img_2.webp' %}" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></img>
+                    <img src="{% static 'Images/img_3.webp' %}" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></img>
+                  </div>
+                
+                </div>
+                <div class="col-sm-7">
+
+                  <div itemprop="name" class="product_name">اپل کامپیوتر دسکتاپ</div>
+                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="form-horizontal" id="product-actions">
+                    <div class="options clearfix"> 
+      
+                      <div id="product_price"><p class="price product-price"><span class="money ToPersian">420 تومان</span></p>  </div> 
+      
+                      <p id="variant_quantity" class="ToPersian">موجودی: 98 عدد</p>      
+      
+                      <div id="purchase"> 
+                        <label for="quantity">عدد: </label>
+                        <!-- <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small ToPersianValue">    -->
+                         <div>
+                           <input min="1" id="quantity" name="quantity" value="1" class="form-control input-small ToPersianValue">
+                           <div>
+                             <a class="BCdown">&#11206;</a>
+                             <a class="BCup">&#11205;</a>
+                           </div>
+
+                         </div>
+                        <!-- <input class="ToPersianValue input_off_number_product_item" min="1" value={{order_partial_buy.count}}> -->
+ 
+                        <button class="btn btn-cart" type="submit" id="add-to-cart">خرید</button>
+                      </div>
+      
+                    </div><!-- /.options -->
+                  </form>
+                  <div id="product_description" class="rte" itemprop="description">
+                    <h4>توضیحات:</h4>
+                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای </p>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+          <div class="widget widget__related-products">
+            <div class="widget_header">
+              <h3>سایر محصولات</h3>
+            </div>
+            <div class="widget_content">
+              <div class="row">
+                <ul class="product-listing product-listing__related">
+                  <li class="product col-sm-3">
+                    {% include 'product_item_component.html'%}
+                  </li>
+                  <li class="product col-sm-3">
+                    {% include 'product_item_component.html'%}
+                  </li>
+                  <li class="product col-sm-3">
+                    {% include 'product_item_component.html'%}
+                  </li>
+                  <li class="product col-sm-3">
+                    {% include 'product_item_component.html'%}
+                  </li>
+                  <li class="product col-sm-3">
+                    {% include 'product_item_component.html'%}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- TODO -->
+      <div class="column_right column col-sm-3">
+
+        <div class="widget widget__collections">
+          <h3 class="widget_header">دسته بندی</h3>
+          <div class="widget_content">
+            <ul class="list">
+              <li><a href="">مقاومت</a></li>
+              <li><a href="">سلف</a></li>
+              <li><a href="">خازن</a></li>
+              <li><a href="">برد</a></li>
+              <li><a href="">جانبی</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="widget widget__best-sellers">
+
+          <h3 class="widget_header">پرفروش ترین</h3>
+
+          <div class="widget_header">
+            <div class="product-listing product-listing__bestsellers">
+
+              <div class="product">
+                <div>
+
+                  <div class="product_info">
+                    <div class="product_name">
+                      <a href="">اپل</a>
+                    </div>
+                    <div class="product_price">
+                      <span class="money ToPersian">1000 تومان</span>
+                    </div>
+                  </div>
+
+                  <div class="product_img">
+                    <a href="">
+                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
+ 
+              <div class="product">
+                <div>
+
+                  <div class="product_info">
+                    <div class="product_name">
+                      <a href="">اپل</a>
+                    </div>
+                    <div class="product_price">
+                      <span class="money ToPersian">1000 تومان</span>
+                    </div>
+                  </div>
+
+                  <div class="product_img">
+                    <a href="">
+                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
+ 
+              <div class="product">
+                <div>
+
+                  <div class="product_info">
+                    <div class="product_name">
+                      <a href="">اپل</a>
+                    </div>
+                    <div class="product_price">
+                      <span class="money ToPersian">1000 تومان</span>
+                    </div>
+                  </div>
+
+                  <div class="product_img">
+                    <a href="">
+                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
+ 
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
