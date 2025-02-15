@@ -1,0 +1,150 @@
+{% extends 'shared/_MainLayout.html' %} {% load static %} {% block content %}
+
+<div id="main" role="main">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li class="firstItem">
+        <a href="/" class="homepage-link" title="Back to the frontpage">خانه</a>
+      </li>
+
+      <li class="lastItem">
+        <span class="page-title">حساب کاربری</span>
+      </li>
+    </ul>
+
+    <div class="row sidebar_right sidebar_off">
+      <div class="column_center">
+        <div id="main_content" class="col-sm-12">
+
+          <div id="template" class="customer customer__login">
+
+            <div id="customer" style="display: block">
+              <h2 class="page_heading">ورود مشتری</h2>
+              <div class="form-horizontal">
+                <form
+                  method="post"
+                  action="/account/login"
+                  id="customer_login"
+                  accept-charset="UTF-8"
+                  data-login-with-shop-sign-in="true"
+                >
+                  <input
+                    type="hidden"
+                    name="form_type"
+                    value="customer_login"
+                  /><input type="hidden" name="utf8" value="✓" />
+
+                  <div id="login_email" class="clearfix large_form form-group">
+                    <label
+                      for="customer_email"
+                      class="login control-label col-sm-4"
+                      >آدرس ایمیل</label
+                    >
+                    <div class="col-sm-4">
+                      <input
+                        type="email"
+                        value=""
+                        name="customer[email]"
+                        id="customer_email"
+                        class="form-control"
+                        size="30"
+                      />
+                    </div>
+                  </div>
+                  <!-- Customer Account Login -->
+                  <div
+                    id="login_password"
+                    class="clearfix large_form form-group"
+                  >
+                    <label
+                      for="customer_password"
+                      class="login control-label col-sm-4"
+                      >رمز عبور</label
+                    >
+                    <div class="col-sm-4">
+                      <input
+                        type="password"
+                        value=""
+                        name="customer[password]"
+                        id="customer_password"
+                        class="form-control"
+                        size="16"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div id="forgot_password">
+                      <div class="col-sm-4 col-sm-offset-4">
+                        <a
+                          href="#"
+                          onclick="showRecoverPasswordForm();return false;"
+                          >فراموشی رمز؟</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="action_bottom col-sm-offset-4 col-sm-4">
+                      <input
+                        class="btn btn-primary"
+                        type="submit"
+                        value="ورود"
+                      />
+                      <span class="note"
+                        >یا
+                        <a href="https://tm-shopify034-computers.myshopify.com"
+                          >بازگشت به فروشگاه</a
+                        ></span
+                      >
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div id="recover-password" class="customer customer__recover" style="display: none;">
+                <!-- ToDo -->
+                <h2 class="page_heading">بازیابی رمز عبور</h2>
+                <p class="note">برای بازنشانی رمز عبور ایمیلی برای شما ارسال می کنیم.</p>
+                <form method="post" action="/account/recover" accept-charset="UTF-8"><input type="hidden" name="form_type" value="recover_customer_password"><input type="hidden" name="utf8" value="✓">
+
+                    <div id="recover_email" class="clearfix form-horizontal">
+                    <div class="form-group">
+                        <label for="email" class="large col-sm-4">ایمیل</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="email" value="" size="30" name="email" id="recover-email">
+                        </div>
+                    </div>
+                    <div class="form-group action_bottom ">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input class="btn btn-primary" type="submit" value="ارسال">
+                            <span class="note">یا <a href="#" onclick="hideRecoverPasswordForm();return false;">بستن</a></span>
+                        </div>
+                    </div>
+                    </div>
+                    </form>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+            function showRecoverPasswordForm() {
+              document.getElementById('recover-password').style.display = 'block';
+              document.getElementById('customer').style.display='none';
+            }
+          
+            function hideRecoverPasswordForm() {
+              document.getElementById('recover-password').style.display = 'none';
+              document.getElementById('customer').style.display = 'block';
+            }
+          
+            if (window.location.hash == '#recover') { showRecoverPasswordForm() }
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

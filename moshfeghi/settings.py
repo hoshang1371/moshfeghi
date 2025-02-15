@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     "homePage",
     "Product",
+    "account",
 ]
 
 MIDDLEWARE = [

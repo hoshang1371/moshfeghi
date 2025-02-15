@@ -26,4 +26,5 @@ urlpatterns = [
         path('about_page_header',about_page_header, 
         name='about_page_header'),
     path('products/',include('Product.urls')),
+    path('account/',include('account.urls')),
 ]

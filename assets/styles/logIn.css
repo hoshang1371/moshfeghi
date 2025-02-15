@@ -1,0 +1,54 @@
+.sidebar_off .column_center #main_content {
+  margin: 0;
+}
+
+.form-group {
+  vertical-align: top !important;
+  margin-top: 15px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-horizontal label.login {
+  width: 10%;
+  color: var(--grey);
+}
+
+#forgot_password > div {
+  width: 100%;
+}
+
+.action_bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.note a{
+    margin-right: 1rem;
+}
+
+.action_bottom input{
+  margin-left: 1rem;
+  text-align: center;
+  width: auto;
+  height: 37px;
+  padding: 0 15px;
+  vertical-align: top;
+  font-family: Gandom;
+  color: var(--white2);
+  background: #999 !important;
+  transition: .25sease-in-out;
+  border: none !important;
+}
+
+.action_bottom input:hover{
+  background: var(--blue) !important;
+}
+
+#recover_email>.form-group>.large{
+  width: 10%;
+  color: var(--grey);
+}

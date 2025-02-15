@@ -2,6 +2,7 @@
 import '../styles/homePage.css'
 import '../styles/style.css'
 import '../styles/product_detail.css'
+import '../styles/logIn.css'
 
 import './numberOfPersian.js'
 // import * as css from "../styles/homePage.css";
