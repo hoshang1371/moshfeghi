@@ -9,3 +9,11 @@ def logIn(request, *args, **kwargs):
     }
     return render(request, 'logIn.html', context)
 
+
+def logOut(request, *args, **kwargs):
+
+    context = {
+
+    }
+    return render(request, 'logOut.html', context)
+
