@@ -15,5 +15,5 @@ def logOut(request, *args, **kwargs):
     context = {
 
     }
-    return render(request, 'logOut.html', context)
+    return render(request, 'createAccount.html', context)
 
