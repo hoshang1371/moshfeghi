@@ -5,16 +5,24 @@
         <div class="row">
           <div class="col-sm-5">
             <ul class="header_user">
+
+              {% if not request.user.is_authenticated %}
               <li class="firstItem">
-                <a href="/account/login" id="customer_login_link">ورود</a>
+                <a href="{% url 'logIn' %}" id="customer_login_link">ورود</a>
               </li>
   
               <li>
-                <a href="/account/register" id="customer_register_link"
-                  >ثبت نام</a
-                >
+                <a href="{% url 'createAccount' %}" id="customer_register_link" >ثبت نام</a >
+              </li>
+              {% else %}
+              <li class="firstItem">
+                <a href="{% url 'log_out' %}" id="customer_login_link">خروج</a>
               </li>
   
+              <li>
+                <a href="#" id="customer_register_link" >حساب کاربری</a >
+              </li>
+              {% endif %}
               <!-- <li class="checkout lastItem"><a href="/cart">Check out</a></li> -->
             </ul>
           </div>
