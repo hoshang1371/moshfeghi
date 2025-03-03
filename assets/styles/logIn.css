@@ -48,6 +48,12 @@
   background: var(--blue) !important;
 }
 
+.sendEmail{
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+}
+
 #recover_email>.form-group>.large{
   width: 10%;
   color: var(--grey);

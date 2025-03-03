@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from .forms import LoginForm
+from .forms import LoginForm ,UserPasswordResetForm
 from django.contrib.auth import login, get_user_model, authenticate, logout
 
 from django.contrib.auth import get_user_model
@@ -9,26 +9,24 @@ User = get_user_model()
 # Create your views here.
 def logIn(request, *args, **kwargs):
     login_form = LoginForm(request.POST or None)
+    pass_form = UserPasswordResetForm(request.POST or None)
     if login_form.is_valid():
         
         email = login_form.cleaned_data.get('email')
         password = login_form.cleaned_data.get('password')
-        print("email:",email)
-        print("password:",password)
-        get_user_email = User.objects.get(email=email)
-        user = authenticate(request, username=get_user_email, password=password)
+        get_user_email = User.objects.filter(email=email).first()
 
-        # print(user_name)
-        # print(password)
-        print(user)
-        print(get_user_email)
-        # print(login_form.cleaned_data)
-
+        if get_user_email is not None:
+            user = authenticate(request, username=get_user_email, password=password)
+        else:
+            user = None
+            
         if user is not None:
             login(request, user)
             return redirect('/')
         else:
-            login_form.add_error('user_name', 'کاربری با مشخصات وارد شده یافت نشد')
+            print("kiri")
+            login_form.add_error('email', 'کاربری با مشخصات وارد شده یافت نشد')
     
     username = request.user.username
 
