@@ -28,3 +28,7 @@ urlpatterns = [
     path('products/',include('Product.urls')),
     path('account/',include('account.urls')),
 ]
+
+urlpatterns += [
+    path('captcha/', include('captcha.urls')),
+]

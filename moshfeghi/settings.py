@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     # 'members',
     'bootstrap5',
     'fontawesomefree',
-
+    'captcha',
+    
     "homePage",
     "Product",
     "account",
