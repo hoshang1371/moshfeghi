@@ -61,6 +61,7 @@
 
 .cap{
   display: flex;
+  justify-content: center;
 }
 
 .cap input{
@@ -82,5 +83,23 @@
   transition: border-color .15sease-in-out, box-shadow .15sease-in-out;
 }
 
+
+
+#forgot_password div i{
+  align-items: center;
+  color: var(--blue);
+}
+.cap i
+{
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  color: var(--blue);
+}
+
 /* .cap input:focus {
 } */
+
+.errr{
+  margin-top: 0;
+}

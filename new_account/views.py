@@ -90,7 +90,7 @@ def createAccount(request, *args, **kwargs):
 
 def log_out(request):
     logout(request)
-    return redirect('/account/logIn/')
+    return redirect('/new_account/logIn/')
 
 def activate(request, uidb64, token):
     try:
