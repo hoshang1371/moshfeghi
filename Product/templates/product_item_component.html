@@ -8,18 +8,29 @@
     <div>
       <div class="product_img">
         <a href="">
-          <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}">
+          <img src="{{ product.image.url }}">
           <!-- <img src="{% static 'Images/showcase1_img.jpg' %}"> -->
         </a>
       </div>
       <div class="product_info">
         <div class="product_name">
-          <a href="">گیره سوسماری</a>
+          <a href="">{{product.title}}</a>
         </div>
         <div class="product_price">
-          <span class="money">
-            1000 تومان
+          {% if product.priceOff != NaN %}
+
+          <span class="money_khat ToPersian">
+            {{product.price}} تومان
           </span>
+
+          <span class="money ToPersian" style="margin-top: 0;">
+            {{product.priceOff}} تومان
+          </span> 
+          {% else %}
+          <span class="money ToPersian">
+            {{product.price}} تومان
+          </span>
+          {%endif%}
         </div>
 
       </div>

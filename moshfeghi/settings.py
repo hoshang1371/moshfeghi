@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     
     "homePage",
     "Product",
+    "moshfegh_products_category",
     # "account",
     "new_account",
 ]
@@ -151,6 +152,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -183,7 +185,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'APP': {
-            #! amniat barghrar shavad
+            #! amniat barghrar shavad kharab ast
             'client_id': config('ClIENT_ID'),
             'secret': config('SECRET'),
         },

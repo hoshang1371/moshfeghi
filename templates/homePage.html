@@ -82,11 +82,12 @@
             <div class="product-listing__index">
               <div class="product-listing">
                 <div class="row lastItem firstItem">                 
+                  {% for vige_product in vige_products %}
 
-                  {% include 'product_item_component.html'%}
-                  {% include 'product_item_component.html'%}
-                  {% include 'product_item_component.html'%}
-                  {% include 'product_item_component.html'%}
+                  {% include 'product_item_component.html' with product=vige_product%}
+
+                  {% endfor %}
+
                 </div>
               </div>
             </div>
@@ -96,6 +97,59 @@
     </div>
   </div>
 </div>
+
+<div id="main" role="main">
+  <div class="container">
+    <div class="row sidebar_right sidebar_off">
+      <div class="column_center">
+        <div id="main_content" class="col-sm-12">
+          <div class="index-scope">
+            <h2 class="page_heading">محصولات پرطرفدار</h2>
+            <div class="product-listing__index">
+              <div class="product-listing">
+                <div class="row lastItem firstItem">                 
+                  {% for most_visit in most_visit_s %}
+
+                  {% include 'product_item_component.html' with product=most_visit%}
+
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div id="main" role="main">
+  <div class="container">
+    <div class="row sidebar_right sidebar_off">
+      <div class="column_center">
+        <div id="main_content" class="col-sm-12">
+          <div class="index-scope">
+            <h2 class="page_heading">محصولات جدید</h2>
+            <div class="product-listing__index">
+              <div class="product-listing">
+                <div class="row lastItem firstItem">                 
+                  {% for latest_product in latest_products %}
+
+                  {% include 'product_item_component.html' with product=latest_product%}
+
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
 
 <!-- nd -->
 <!-- bottom -->
