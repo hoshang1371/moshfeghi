@@ -3,39 +3,38 @@
 
 <div id="demo" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" ></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1" ></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2" ></button>
+    {% for slider in sliders %}
+      {% if slider.id == 1%}
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="{{ slider.id|add:'-1' }}" class="active" ></button>
+      {% else %}
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="{{ slider.id|add:'-1' }}" ></button>
+      {% endif %}
+    {% endfor %}
   </div>
 
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'Images/slide1_image.jpg' %}" alt="Los Angeles" class="w-50" />
-      <div class="carousel-caption  d-none d-md-block w-50">
-        <h2>ای پد</h2>
-        <h3>صفحه نمایش1</h3>
-        <h4 class="money">1000 تومان</h4>
-        <span>خرید</span>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="{% static 'Images/slide3_image.jpg' %}" alt="New York" class="d-block w-50" />
-      <div class="carousel-caption  d-none d-md-block w-50">
-        <h2>ای پد</h2>
-        <h3>صفحه نمایش3</h3>
-        <h4 class="money">1000 تومان</h4>
-        <span>خرید</span>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="{% static 'Images/slide2_image.jpg' %}" alt="New York" class="d-block w-50" />
-      <div class="carousel-caption  d-none d-md-block w-50">
-        <h2>ای پد</h2>
-        <h3>صفحه نمایش 2</h3>
-        <h4 class="money">1000 تومان</h4>
-        <span>خرید</span>
-      </div>
-    </div>
+
+    {% for slider in sliders %}
+      {% if slider.id == 1%}
+        <div class="carousel-item active">
+          <div class="d-flex justify-content-center align-items-center pt-3 pb-3  w-50 h-100">
+            <img src="{{slider.image.url}}" alt="Los Angeles" class="d-block w-75" />
+          </div>
+          <div class="carousel-caption  d-none d-md-block w-50">
+            <h2>{{slider.title}}</h2>
+            <h3>{{slider.description}}</h3>
+            <h4 class="money ToPersian">{{slider.price}} تومان</h4>
+            <a href="{{slider.link}}">خرید</a>
+            <!-- <span href="#">خرید</span> -->
+          </div>
+        </div>
+      {% else %}
+        {% include 'slider_item_component.html' with slider=slider%}
+      {% endif %}
+      
+    {% endfor %}
+    
+
   </div>
 
     <span class="carousel-control-next-icon"></span>
@@ -43,16 +42,10 @@
 </div>
 
 <div class="row bottomSlider">
-  <div class="col-sm-12 col-lg-4 custom_showcase custom_showcase1">
-      <a href="/collections/hard-drives"> 
-      <img src="{% static 'Images/showcase1_img.jpg' %}">
-      <div>
-        <h3>سخت افزار</h3>
-        <h4>لورم ایپسوم متن ساختگی با </h4>
-      </div>
-      </a>
-  </div>
-  <div class="col-sm-12 col-lg-4 custom_showcase custom_showcase2">
+  {% for slider_down in sliders_down %}
+    {% include 'slider_item_down_component.html' with slider_down=slider_down%}
+  {% endfor %}
+  <!-- <div class="col-sm-12 col-lg-4 custom_showcase ">
       <a href="/collections/accessories">
         <img src="{% static 'Images/showcase1_img.jpg' %}">
         <div>
@@ -60,8 +53,8 @@
         <h4>لورم ایپسوم متن ساختگی با </h4>
       </div>
       </a>
-  </div>
-  <div class="col-sm-12 col-lg-4 custom_showcase custom_showcase3">
+  </div> -->
+  <!-- <div class="col-sm-12 col-lg-4 custom_showcase ">
       <a href="/collections/monitors">
         <img src="{% static 'Images/showcase1_img.jpg' %}">
         <div>
@@ -69,7 +62,7 @@
         <h4>لورم ایپسوم متن ساختگی با </h4>
       </div>
       </a>
-  </div>
+  </div> -->
 </div>
 <!--  -->
 <div id="main" role="main">

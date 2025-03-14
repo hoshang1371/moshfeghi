@@ -355,7 +355,7 @@ form {
   color: var(--red);
   font-family: Gandom;
 } */
-.carousel-caption span {
+.carousel-caption a {
   display: inline-block;
   margin: 37px 0 0;
   padding: 15px 20px 17px;
@@ -378,7 +378,7 @@ form {
 
 }
 
-.carousel-caption span:hover{
+.carousel-caption a:hover{
   background: #666;
   color: #fff;
   /* width: 300px; */

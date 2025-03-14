@@ -1,0 +1,13 @@
+{% load static %} {% load render_partial %} {% block content %}
+
+    <div class="col-sm-12 col-lg-4 custom_showcase ">
+        <a href="/collections/hard-drives"> 
+        <img src="{{ slider_down.imageSlider.url }}">
+        <div>
+        <h3>{{ slider_down.title }}</h3>
+        <h4> {{ slider_down.description1 }} </h4>
+        </div>
+        </a>
+    </div>
+
+{% endblock %}

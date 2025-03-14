@@ -1,0 +1,15 @@
+{% load static %} {% load render_partial %} {% block content %}
+
+<div class="carousel-item">
+    <div class="d-flex justify-content-center align-items-center pt-3 pb-3  w-50 h-100">
+        <img src="{{slider.image.url}}" alt="New York" class="d-block w-75" />
+    </div>
+  <div class="carousel-caption d-none d-md-block w-50">
+    <h2>{{slider.title}}</h2>
+    <h3>{{slider.description}}</h3>
+    <h4 class="money ToPersian">{{slider.price}} تومان</h4>
+    <a href="{{slider.link}}">خرید</a>
+  </div>
+</div>
+
+{% endblock %}
