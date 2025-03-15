@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     # "account",
     "new_account",
     "moshfeghi_slider",
+    "moshfeghi_setting",
 ]
 
 MIDDLEWARE = [
