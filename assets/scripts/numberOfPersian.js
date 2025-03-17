@@ -1,6 +1,6 @@
 let numberToProduct = document.querySelectorAll('.ToPersian');
 
-console.log(numberToProduct[0].innerHTML);
+// console.log(numberToProduct[0].innerHTML);
 // console.log(numberToProduct[1].innerHTML);
 //!console.log(numberToProduct.forEach(numberToProduct.innerHTML));
 

@@ -11,10 +11,9 @@ def home_page(request):
     most_visit_product = Product.objects.order_by('-visit_count').all()[:15]
     latest_products = Product.objects.order_by('-id').all()[:10]
     vige_products = Product.objects.filter(vige=True).all()[:10]
-    print(f"site_setting={site_setting}")
 
     context ={
-        'site_setting':site_setting,
+        # 'site_setting':site_setting,
         'sliders_down':sliders_down,
         'sliders' : sliders,
         'most_visit_s' : most_visit_product,

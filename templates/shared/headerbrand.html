@@ -51,10 +51,10 @@
         </div>
         <div class="col-sm-5 col-md-4 col-lg-3">
           <div class="header_search">
-            <form action="/search" method="get" class="search-form" role="search">
-              <input id="search-feild" type="text" name="q" placeholder="جستجو" class="hint">
+            <form class="search-form" action="/products/search" method="GET">
+              <input id="search-feild" type="text" name="q" placeholder="جستجو" class="hint" value="{{ request.GET.q }}">
+              <!-- <input type="text" class="form-control" placeholder="جستجو کنید" value="{{ request.GET.q }}" name="q"/> -->
               <button id="search-submit" type="submit">
-                <!-- <i class="fa fa-search"></i> -->
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </form>

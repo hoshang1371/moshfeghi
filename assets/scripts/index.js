@@ -4,10 +4,12 @@ import '../styles/style.css'
 import '../styles/product_detail.css'
 import '../styles/logIn.css'
 
+import '../styles/product_list.css'
+
 import './numberOfPersian.js'
 // import * as css from "../styles/homePage.css";
 // import '../scripts/homePage'
-console.log("gol")
+// console.log("gol")
 
 // !==============================
 let numberToPersianValue = document.querySelectorAll('.ToPersianValue');
@@ -53,7 +55,7 @@ BCup.addEventListener("click", function(){
 
 BCdown.addEventListener("click", function(){
     let fa_number = numberToPersianValue[0].value;
-    console.log(fa_number)
+    // console.log(fa_number)
     let en_number = fa_number.toEnglishDigit();
     if(en_number > 1)
         --en_number;

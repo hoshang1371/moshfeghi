@@ -9,22 +9,23 @@
         </li>
 
         <li class="has-dropdown">
-            <a href="/collections/all" title="" class="sf-with-ul">محصولات</a>
+            <a href="{% url 'product_list' %}" title="" class="sf-with-ul">محصولات</a>
             
             <!-- <ul class="sub-menu" style="float: none; width: 19.4615em; display: none;"> -->
             <ul class="sub-menu">
             
+                {% for category in categorys %}
+                <li class="first firstItem" style="white-space: normal; float: none; width: 100%;"><a class="first" href="/products/{{ category.name }}" style="float: none; width: auto;">{{ category.title }}</a></li>
+                {% endfor %}
             
-                <li class="first firstItem" style="white-space: normal; float: none; width: 100%;"><a class="first" href="/collections/monitors" style="float: none; width: auto;">دیود</a></li>
-            
-                <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/hard-drives" style="float: none; width: auto;">مقاومت</a></li>
+                <!-- <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/hard-drives" style="float: none; width: auto;">مقاومت</a></li>
             
                 <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/keyboards-mice" style="float: none; width: auto;">خازن</a></li>
             
                 <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/cpus" style="float: none; width: auto;">سلف</a></li>
             
                 <li class="last lastItem" style="white-space: normal; float: none; width: 100%;"><a class="last" href="/collections/accessories" style="float: none; width: auto;">رگولاتور</a></li>
-            
+             -->
             
             </ul>
             

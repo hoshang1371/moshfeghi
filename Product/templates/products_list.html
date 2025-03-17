@@ -1,0 +1,47 @@
+{% extends 'shared/_MainLayout.html' %} {% load static %} {% block content %}
+
+
+<div id="main" role="main">
+    <div class="container">
+      <div class="row sidebar_right sidebar_off">
+        <div class="column_center">
+          <div id="main_content" class="col-sm-12">
+            <div class="index-scope">
+              <h2 class="page_heading">{{ header }}</h2>
+              <div class="product-listing__index">
+                <div class="product-listing">
+                  <div class="row lastItem firstItem">                 
+                    {% for product in page_obj %}
+  
+                    {% include 'product_item_component.html' with product=product%}
+  
+                    {% endfor %}
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="pagination">
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page=1" style="margin-left: 1rem;">اولین</a>
+                <a href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+            {% endif %}
+            {% for page in paginator.page_range %}
+                    <!-- <a class="ToPersian" href="?page={{ page }}">{{ page }}</a> -->
+                    <a {% if page == page_obj.number %} class="ToPersian active" {%else%} class="ToPersian" {% endif %} href="?page={{ page }}">{{ page }}</a>
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <a class="" href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                <a class="" href="?page={{ page_obj.paginator.num_pages }}" style="margin-right: 1rem;">اخرین</a>
+            {% endif %}
+        </div>
+    </section>
+
+</div>
+{% endblock %}
