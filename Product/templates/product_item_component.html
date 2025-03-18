@@ -3,6 +3,7 @@
 <div class="product col-sm-3" style="cursor: pointer;">
   <div>
     <div class="product_img">
+      <input type="hidden" value="{{ product.id }}">
       <a href="{{ product.get_absolute_url }}">
         <img src="{{ product.image.url }}" />
         <!-- <img src="{% static 'Images/showcase1_img.jpg' %}"> -->
@@ -10,7 +11,7 @@
     </div>
     <div class="product_info">
       <div class="product_name">
-        <a href="">{{product.title}}</a>
+        <a class="productTitle">{{product.title}}</a>
       </div>
       <div class="product_price">
         {% if product.priceOff != NaN %}
@@ -28,11 +29,12 @@
   </div>
 </div>
 
-<script>
+<!-- <script>
   var comp = document.querySelector(".product div")
   comp.onclick = function(){
-    window.location = "{{ product.get_absolute_url }}"
+    console.log("kiri")
+    //window.location = "{{ product.get_absolute_url }}"
   };
-</script>
+</script> -->
 
 {% endblock %}

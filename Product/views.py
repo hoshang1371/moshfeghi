@@ -1,17 +1,51 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from Product.models import Product
+from Product.models import Product, ProductGallery
 from moshfegh_products_category.models import ProductCategory
 from moshfeghi_setting.models import SiteSetting
 from django.http import Http404, request
 
+import itertools
+
+def my_grouper(n, iterable):
+    args = [iter(iterable)] * n
+    return ([e for e in t if e is not None] for t in itertools.zip_longest(*args))
 # Create your views here.
 def product_detail(request, *args, **kwargs):
+
     selected_product_id = kwargs['productId']
     product_name = kwargs['name']
-    print(selected_product_id,product_name)
+
+    # TODO
+    # new_order_form = UserNewOrderForm(request.POST or None, initial={'product_id': selected_product_id})
+    # contact_form_comment = CustomersCommentsForm(request.POST or None)
+
+    # print(selected_product_id,product_name)
+    product = Product.objects.get_by_id(selected_product_id)
+
+    if product is None or not product.active:
+        raise Http404('محصول مورد نظر یافت نشد')
+    
+    product.visit_count += 1
+    product.save()
+
+
+    related_products = Product.objects.get_queryset().filter(categories__product=product).distinct()
+
+    # grouped_related_products = list(my_grouper(3, related_products))
+
+    galleries = ProductGallery.objects.filter(product_id=selected_product_id)
+
+    print(galleries)
+    # grouped_galleries = list(my_grouper(1, galleries))
+
     context = {
+        'product': product,
+        'galleries' : galleries,
+        'related_products' : related_products,
+        # 'customercomments' : customercomments,
+
 
     }   
 

@@ -7,6 +7,7 @@ import '../styles/logIn.css'
 import '../styles/product_list.css'
 
 import './numberOfPersian.js'
+import './homePage.js'
 // import * as css from "../styles/homePage.css";
 // import '../scripts/homePage'
 // console.log("gol")
