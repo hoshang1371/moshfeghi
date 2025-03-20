@@ -38,11 +38,19 @@ def product_detail(request, *args, **kwargs):
     galleries = ProductGallery.objects.filter(product_id=selected_product_id)
 
     print(galleries)
+    galleries_idx = list(zip(galleries, range(0, len(galleries)+1)))
+    # for idx, x in enumerate(galleries):
+    #     print(idx, x)
+
+    print(galleries_idx)
+    # for g in galleries:
+    #     print(g.id)
     # grouped_galleries = list(my_grouper(1, galleries))
 
     context = {
         'product': product,
-        'galleries' : galleries,
+        'galleries' : galleries_idx,
+        # 'galleries_2' : galleries_idx,
         'related_products' : related_products,
         # 'customercomments' : customercomments,
 
