@@ -7,6 +7,16 @@ import os
 from moshfegh_products_category.models import ProductCategory
 from django.db.models import Q
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+from django_jalali.db import models as jmodels
+import jdatetime
+import convert_numbers
+
+import pytz
+# from django.http import request
+from extentions.time import getDuration
+
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
     name, ext = os.path.splitext(base_name)
@@ -103,3 +113,64 @@ class ProductGallery(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class CustomerComment(models.Model):
+
+    CommentProduct = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول پیام')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='کاربر پیام')
+
+    parent = models.ForeignKey(
+        'self', 
+        default=None, 
+        null=True, 
+        blank=True,
+        on_delete=models.CASCADE,
+        related_name='replies', 
+        verbose_name='زیر دسته')
+    text = models.TextField(verbose_name='متن پیام',
+                            null=True, blank=True)
+    
+
+    created = jmodels.jDateTimeField(auto_now_add=True,blank = True, null = True, verbose_name='تاریخ ایجاد پیام شمسی')
+    updated = jmodels.jDateTimeField(auto_now=True,blank = True, null = True, verbose_name='تاریخ تغییر پیام شمسی')
+
+    is_ok = models.BooleanField(verbose_name='تایید شده / نشده' ,default=False)
+
+
+    def time_calc(self):
+        now = jdatetime.datetime.utcnow().replace(tzinfo=pytz.timezone('Asia/Tehran')) 
+        return getDuration(self.updated, now)
+
+    def like_comment_calc(self):
+        numberLikeC =LikesCustomerComment.objects.filter(CustomerComment_id=self.id,CustomerComment__CommentProduct_id=self.CommentProduct.id,likes=True).count()
+        return(convert_numbers.english_to_persian(str(int(numberLikeC))))
+    
+    def is_liked(self):
+        a = False
+        # request = args[0] if args else kwargs.get('request') or self.request
+        # isLiked =LikesCustomerComment.objects.filter(user=1,CustomerComment_id=self.id,CustomerComment__CommentProduct_id=self.CommentProduct.id,likes=True).first()
+        # print(request.user)
+        return(a)
+    
+
+    
+    class Meta:
+        verbose_name = ' نظرات کاربران '
+        verbose_name_plural='نظرات در مورد کالا کاربران'
+
+    def __str__(self):
+        return self.text
+    
+
+class LikesCustomerComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    CustomerComment = models.ForeignKey(CustomerComment, on_delete=models.CASCADE,related_name='isLiked', )
+    likes = models.BooleanField(default=False)
+
+
+    
+    class Meta:
+        unique_together = ('user', 'CustomerComment',)
+        verbose_name = 'پسندیدن نظرات'
+        verbose_name_plural = 'پسندیدن نظرات'

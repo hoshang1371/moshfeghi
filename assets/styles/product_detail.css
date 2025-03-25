@@ -292,3 +292,77 @@ label {
 .column .money, .column_center .money {
     font-size: 20px;
 }
+
+/* ================commentSection==================== */
+.commented-user h5{
+    border: none;
+    font-size: 1rem;
+    margin: 0!important;
+    padding: 0!important;
+    margin-left: 1rem!important;
+}
+
+.commented-user>div>span{
+    color: var(--grey);
+    font-size: 0.75rem
+}
+
+.comment-text-sm>span{
+    color: var(--black);
+    font-size: 0.9rem;
+    font-family: Gandom;
+}
+
+.voting-icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.voting-icons svg {
+    cursor: pointer;
+}
+
+.voting-icons h6 {
+    font-family: Gandom;
+    font-size: 0.9rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border: none!important;
+    transition: color .3s ease;
+}
+
+.voting-icons .removeComment {
+    /* left: 0; */
+    position: relative;
+    margin-right: 25%;
+}
+
+.voting-icons h6:hover{
+    color: var(--red);
+}
+
+.add-comment-section input{
+    border: none;
+}
+
+.add-comment-section button{
+    color: var(--grey3);
+    background-color: var(--white1);
+    border-color: var(--grey3);
+    transition: background 0.5s ease;
+}
+
+.add-comment-section button:hover{
+    background: #666;
+    color: #fff;
+  }
+
+
+.voting-icons>.activeSvg{
+    display: block;
+}
+
+.voting-icons>.deactiveSvg{
+    display: none;
+}

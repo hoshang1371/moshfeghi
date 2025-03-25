@@ -20,10 +20,10 @@
 
           
           <div class="product-scope">
+            <input type="hidden" value="{{ product.id }}">
             <div class="product_wrap">
               <div class="row">
                 <div id="product_image-container" class="col-sm-5">
-         
                   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 
                     <div class="carousel-inner carousel-asli">
@@ -110,7 +110,6 @@
                   <div id="product_description" class="rte" itemprop="description">
                     <h4>توضیحات:</h4>
                     <p>{{ product.description }}</p>
-                    <!-- <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای </p> -->
                   </div>
                 </div>
 
@@ -119,6 +118,24 @@
             </div>
           </div>
 
+          <div class="widget widget__related-products">
+            <div class="widget_header">
+              <h3> نظرات کاربران </h3>
+              
+            </div>
+            <div class="widget_content">
+              <div class="col">
+                {% for comment in comments %}
+                  {% include 'commentSection.html' with comment=comment%}
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+          <div class="cantainer_comment_up">
+            {% include 'customerComentPost.html'%}
+          </div>
+          
           <div class="widget widget__related-products">
             <div class="widget_header">
               <h3>سایر محصولات</h3>
@@ -240,5 +257,7 @@
     </div>
   </div>
 </div>
+
+<script src="{% static 'js/productDetails.js' %}" type="module" ></script>
 
 {% endblock %}

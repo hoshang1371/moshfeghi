@@ -1,8 +1,20 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Product ,ProductGallery
+from .models import CustomerComment, LikesCustomerComment, Product ,ProductGallery
 
+@admin.register(CustomerComment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'CommentProduct', 'created', 'is_ok')
+    list_filter = ('is_ok', 'created', 'updated')
+    search_fields = ('user', 'text')
+
+
+@admin.register(LikesCustomerComment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'CustomerComment', 'likes')
+    list_filter = ('user', 'CustomerComment', 'likes')
+    search_fields = ('user', 'CustomerComment','likes')
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'title', 'price', 'active']

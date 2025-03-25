@@ -1,16 +1,37 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from Product.models import Product, ProductGallery
+from Product.models import CustomerComment, LikesCustomerComment, Product, ProductGallery
+from Product.serializers import CustomerCommentSerializer, DeleteCustomerCommentSerializer, LikesCustomerCommentSerializer
 from moshfegh_products_category.models import ProductCategory
 from moshfeghi_setting.models import SiteSetting
 from django.http import Http404, request
 
 import itertools
+from rest_framework.response import Response
+
+from rest_framework.generics import DestroyAPIView,ListAPIView,CreateAPIView,ListCreateAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+import convert_numbers
+
+# from django import template
+# from django.template.defaultfilters import stringfilter
+
+# register = template.Library()
+
+
+
+# from django.db.models import F
 
 def my_grouper(n, iterable):
     args = [iter(iterable)] * n
     return ([e for e in t if e is not None] for t in itertools.zip_longest(*args))
+
+# @register.filter
+# def comment_isliked(comment,request):
+#     return comment.isLiked.filter(user=request.user).first()
+
 # Create your views here.
 def product_detail(request, *args, **kwargs):
 
@@ -18,11 +39,68 @@ def product_detail(request, *args, **kwargs):
     product_name = kwargs['name']
 
     # TODO
-    # new_order_form = UserNewOrderForm(request.POST or None, initial={'product_id': selected_product_id})
-    # contact_form_comment = CustomersCommentsForm(request.POST or None)
 
-    # print(selected_product_id,product_name)
     product = Product.objects.get_by_id(selected_product_id)
+    # comments_parent = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=False).prefetch_related('replies')
+    # comments_all = CustomerComment.objects.filter(CommentProduct=product).values('id', 'CommentProduct_id', 'user_id', 'parent_id', 'text', 'replies')
+    comments_all = CustomerComment.objects.filter(CommentProduct=product)
+    comments = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=True)
+
+    # print(comments_all)
+
+    # print(comments_all[5].replies.all())
+
+
+    # print(comments_parent[3].replies.all())
+
+    # for comment in comments_all:
+    #     print(comment.user  == request.user)
+
+        # for child in comment.isLiked.all():
+        #     print(child.text)
+
+    # def add_Childeren(commen):
+    #     if commen.parent != None:
+    #         commen.parent.childe = commen
+    #         # print(type(commen.parent))
+    #         add_Childeren(commen.parent)
+
+    #     return
+
+    # for com in comments_parent:
+    #     likeComment = LikesCustomerComment.objects.filter(user=request.user,CustomerComment=com).first()
+    #     if likeComment is not None:
+    #         com.isLike =True
+    #     else:
+    #         com.isLike =False
+    #     add_Childeren(com)
+    #     # if com.parent != None:
+    #     print("=====")
+    #     print(com)
+    #     com.parent.childe = com
+    #     print(com.parent.childe)
+
+    # print(comments_parent[0].parent.childe)
+
+    # for coment in comments_all:
+    #     likeComment = LikesCustomerComment.objects.filter(user=request.user,CustomerComment=coment).first()
+    #     # print(type(coment))
+    #     if likeComment is not None:
+    #         coment.isLike =True
+    #         # coment.annotate(isLike =True)
+    #     else:
+    #         coment.isLike =False
+    #         # coment.annotate(isLike =False)
+    #     # print(coment.isLike)
+    #     coment.save()
+
+    # print(comments_all)
+
+    # comments = comments_all.filter(parent__isnull=True).values()
+
+    # print(comments[0])
+
+
 
     if product is None or not product.active:
         raise Http404('محصول مورد نظر یافت نشد')
@@ -37,12 +115,12 @@ def product_detail(request, *args, **kwargs):
 
     galleries = ProductGallery.objects.filter(product_id=selected_product_id)
 
-    print(galleries)
+    # print(galleries)
     galleries_idx = list(zip(galleries, range(0, len(galleries)+1)))
     # for idx, x in enumerate(galleries):
     #     print(idx, x)
 
-    print(galleries_idx)
+    # print(galleries_idx)
     # for g in galleries:
     #     print(g.id)
     # grouped_galleries = list(my_grouper(1, galleries))
@@ -50,7 +128,8 @@ def product_detail(request, *args, **kwargs):
     context = {
         'product': product,
         'galleries' : galleries_idx,
-        # 'galleries_2' : galleries_idx,
+        'comments' : comments,
+        # 'comments_parent' : comments_parent,
         'related_products' : related_products,
         # 'customercomments' : customercomments,
 
@@ -117,3 +196,59 @@ class SearchProductsView(ListView):
         context['header'] = "جست و جو"
         # context['setting'] =SiteSetting.objects.first()
         return context
+    
+
+
+
+class DeleteCustomerComment(DestroyAPIView):
+    queryset = CustomerComment.objects.all()
+    serializer_class = DeleteCustomerCommentSerializer
+    permission_classes = [IsAuthenticated]
+
+class CustomerCommentClass(ListAPIView):
+    queryset = CustomerComment.objects.all()
+    serializer_class = CustomerCommentSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
+
+class PostCustomerComment(CreateAPIView):   
+    # serializer_class = PostCustomerCommentSerializer
+    serializer_class = CustomerCommentSerializer
+    queryset = CustomerComment.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        user = request.user.id
+        comments = CustomerComment.objects.create(
+            user_id= user,
+            CommentProduct_id=request.data["product"],
+            text=request.data["text"],
+            is_ok=False,
+            parent_id=request.data["parent"],
+        )
+        
+        return Response({
+            "ok":"ok"
+        })
+    
+#TODO: change ListCreateAPIView
+class LikesCustomerCommentClass(ListCreateAPIView):
+    queryset = LikesCustomerComment.objects.all()
+    serializer_class = LikesCustomerCommentSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request,CustomerComment_id, *args, **kwargs):
+        user = request.user
+        if LikesCustomerComment.objects.filter(user=user,CustomerComment_id=CustomerComment_id).exists():
+            likC = LikesCustomerComment.objects.filter(user=user,CustomerComment_id=CustomerComment_id).first()
+
+        else:
+            likC = LikesCustomerComment.objects.create(user=user,CustomerComment_id=CustomerComment_id)
+
+        likC.likes = not likC.likes
+        likC.save()
+        numberLikeC = LikesCustomerComment.objects.filter(CustomerComment_id=CustomerComment_id,likes=True)
+        return Response({
+            "like" : likC.likes,
+            "numberLike": convert_numbers.english_to_persian(str(numberLikeC.count()))
+        })

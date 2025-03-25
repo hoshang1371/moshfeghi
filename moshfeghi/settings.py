@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'bootstrap5',
     'fontawesomefree',
     'captcha',
+    'rest_framework',
     # 'alluth.socialaccount.providers.google',
     
     "homePage",
@@ -207,3 +208,12 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
 # ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_LOGIN_METHODS = {'email'}
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+    ]
+}

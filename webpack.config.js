@@ -2,12 +2,18 @@ const path = require('path');
 
 module.exports ={
     mode: 'development',
-    entry: './assets/scripts/index.js',
+    entry:{
+      './index':'./assets/scripts/index.js',
+      './homePage':'./assets/scripts/homePage.js',
+      './productDetails':'./assets/scripts/productDetails.js'
+    },
     output: {
         // publicPath:'http://127.0.0.1:8080/',
         // path: path.resolve(__dirname, 'homePage', 'static'),
         path: path.resolve(__dirname, 'assets', 'js'),
-        filename: 'bundle.js'
+        // filename: 'bundle.js',
+        // path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js'
     },
     module:{
         rules: [
