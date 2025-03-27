@@ -1,0 +1,31 @@
+{% load static %} {% load render_partial %} {% block content %}
+<div class="product">
+    <div>
+
+      <div class="product_info">
+        <div class="product_name">
+          <a href="{{best_seller.get_absolute_url}}">{{best_seller.title}}</a>
+        </div>
+        <div class="product_price">
+          <!-- <span class="money ToPersian">1000 تومان</span> -->
+          {% if best_seller.priceOff != NaN %}
+
+          <span class="money_khat ToPersian"> {{best_seller.price}} تومان </span>
+  
+          <span class="money ToPersian" style="margin-top: 0">
+            {{best_seller.priceOff}} تومان
+          </span>
+          {% else %}
+          <span class="money ToPersian"> {{best_seller.price}} تومان </span>
+          {%endif%}
+        </div>
+      </div>
+
+      <div class="product_img">
+        <a href="{{best_seller.get_absolute_url}}">
+          <img src="{{ best_seller.image.url }}" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

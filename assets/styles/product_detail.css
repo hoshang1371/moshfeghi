@@ -18,11 +18,23 @@
 {
     color: var(--black);
 }
-.breadcrumb>li+li:before {
+.breadcrumb>li>ul>li:before{
     padding: 0 5px;
     color: #ccc;
     content: "/\a0";
 }
+
+.breadcrumb>li:last-child:before{
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\a0";
+}
+
+/* .breadcrumb>li+li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\a0";
+} */
 
 .column_center ul {
     list-style-type: none;
@@ -243,7 +255,7 @@ label {
 .column .widget ul.list{
     padding: 0!important;
 }
-.column .widget ul.list li {
+.column .widget ul.list li:not(:last-child) {
     border-bottom: 1px solid #dddddd;
 }
 

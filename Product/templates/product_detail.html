@@ -2,16 +2,31 @@
 <!-- MAIN CONTENT -->
 <div id="main" role="main">
   <div class="container">
-    <ul class="breadcrumb">
+    <ul class="breadcrumb" >
       <li class="firstItem">
-        <a href="" class="homepage-link">خانه</a>
+        <a href="/" class="homepage-link">خانه</a>
       </li>
       <li>
-        <a href="/collections/accessories" title="">لوازم جانبی</a>
+        {% for cat in product.categories.all %}
+        <ul style="width: 100%; display:flex; padding:0">
+          {% if cat.parent %}
+            {% include 'categuryChilderen.html' with catChilde=cat.parent%}
+          {% endif %}
+    
+          <li>
+            <a href="/products/{{ cat.name }}" title="">{{cat.title}}</a>
+          </li>
+          <li class="lastItem">
+            <span class="page-title">{{product.title}}</span>
+          </li>
+        </ul>
+        {% endfor %}
       </li>
-      <li class="lastItem">
-        <span class="page-title">اپل</span>
-      </li>
+
+
+      <!-- <li class="lastItem">
+        <span class="page-title">{{product.title}}</span>
+      </li> -->
     </ul>
     <div class="row sidebar_right">
 
@@ -143,21 +158,13 @@
             <div class="widget_content">
               <div class="row">
                 <ul class="product-listing product-listing__related">
+
+                  {% for random_product in random_products %}
                   <li class="product col-sm-3">
-                    {% include 'product_item_component.html'%}
+                    {% include 'product_item_component.html'  with product=random_product%}
                   </li>
-                  <li class="product col-sm-3">
-                    {% include 'product_item_component.html'%}
-                  </li>
-                  <li class="product col-sm-3">
-                    {% include 'product_item_component.html'%}
-                  </li>
-                  <li class="product col-sm-3">
-                    {% include 'product_item_component.html'%}
-                  </li>
-                  <li class="product col-sm-3">
-                    {% include 'product_item_component.html'%}
-                  </li>
+                  {% endfor %}
+                 
                 </ul>
               </div>
             </div>
@@ -172,11 +179,16 @@
           <h3 class="widget_header">دسته بندی</h3>
           <div class="widget_content">
             <ul class="list">
-              <li><a href="">مقاومت</a></li>
+              {% for cat in product.categories.all %}
+              <li>
+                <a href="/products/{{cat.name}}" title="">{{cat}}</a>
+              </li>
+              {% endfor %}
+              <!-- <li><a href="">مقاومت</a></li>
               <li><a href="">سلف</a></li>
               <li><a href="">خازن</a></li>
               <li><a href="">برد</a></li>
-              <li><a href="">جانبی</a></li>
+              <li><a href="">جانبی</a></li> -->
             </ul>
           </div>
         </div>
@@ -188,65 +200,11 @@
           <div class="widget_header">
             <div class="product-listing product-listing__bestsellers">
 
-              <div class="product">
-                <div>
+              {% for best_seller in best_sellers %}
 
-                  <div class="product_info">
-                    <div class="product_name">
-                      <a href="">اپل</a>
-                    </div>
-                    <div class="product_price">
-                      <span class="money ToPersian">1000 تومان</span>
-                    </div>
-                  </div>
+              {% include 'bestSeller.html' with best_seller=best_seller%}
 
-                  <div class="product_img">
-                    <a href="">
-                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
-                    </a>
-                  </div>
-                </div>
-              </div>
- 
-              <div class="product">
-                <div>
-
-                  <div class="product_info">
-                    <div class="product_name">
-                      <a href="">اپل</a>
-                    </div>
-                    <div class="product_price">
-                      <span class="money ToPersian">1000 تومان</span>
-                    </div>
-                  </div>
-
-                  <div class="product_img">
-                    <a href="">
-                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
-                    </a>
-                  </div>
-                </div>
-              </div>
- 
-              <div class="product">
-                <div>
-
-                  <div class="product_info">
-                    <div class="product_name">
-                      <a href="">اپل</a>
-                    </div>
-                    <div class="product_price">
-                      <span class="money ToPersian">1000 تومان</span>
-                    </div>
-                  </div>
-
-                  <div class="product_img">
-                    <a href="">
-                      <img src="{% static 'Images/apple_g5_powermac_2ghz_desktop_computer_1_medium.png' %}" alt="">
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
  
 
             </div>

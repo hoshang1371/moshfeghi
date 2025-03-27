@@ -1,0 +1,13 @@
+{% load static %} {% load render_partial %} {% block content %}
+{% if catChilde.parent %}
+    {% include 'categuryChilderen.html' with catChilde=catChilde.parent%}
+{% endif %}
+<li>
+    <a href="/products/{{ catChilde.name }}" title="">{{catChilde.title}}</a>
+
+</li>
+
+{% comment %}
+<!-- <div>{{catChilde.children.all.0}}</div> -->
+{% endcomment %} 
+{% endblock %}

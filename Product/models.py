@@ -76,7 +76,7 @@ class Product(models.Model):
     image_tumpnail = models.ImageField(upload_to= upload_image_tumpnail_path, null=True, blank=True, verbose_name='تصویر_بند_انگشتی')
     #image_tumpnail = ResizedImageField(upload_to= upload_image_tumpnail_path, size=[150, 100], null=True, blank=True, verbose_name='تصویر_بند_انگشتی')
     active = models.BooleanField(default=False, verbose_name='فعال / غیرفعال')
-    categories = models.ManyToManyField(ProductCategory, blank =True, verbose_name='دسته بندی ها')
+    categories = models.ManyToManyField(ProductCategory, blank =True, verbose_name='دسته بندی ها',related_name='childe')
     visit_count = models.IntegerField(default=0, verbose_name='تعداد بازدید ها')
     vige = models.BooleanField(default=False, verbose_name='ویژه / غیرویژه')
 #"image": "G:'\kartmelli.jpg"

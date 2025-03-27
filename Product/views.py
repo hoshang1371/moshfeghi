@@ -14,6 +14,7 @@ from rest_framework.generics import DestroyAPIView,ListAPIView,CreateAPIView,Lis
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import convert_numbers
+from random import randint
 
 # from django import template
 # from django.template.defaultfilters import stringfilter
@@ -41,77 +42,20 @@ def product_detail(request, *args, **kwargs):
     # TODO
 
     product = Product.objects.get_by_id(selected_product_id)
-    # comments_parent = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=False).prefetch_related('replies')
-    # comments_all = CustomerComment.objects.filter(CommentProduct=product).values('id', 'CommentProduct_id', 'user_id', 'parent_id', 'text', 'replies')
-    comments_all = CustomerComment.objects.filter(CommentProduct=product)
     comments = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=True)
-
-    # print(comments_all)
-
-    # print(comments_all[5].replies.all())
-
-
-    # print(comments_parent[3].replies.all())
-
-    # for comment in comments_all:
-    #     print(comment.user  == request.user)
-
-        # for child in comment.isLiked.all():
-        #     print(child.text)
-
-    # def add_Childeren(commen):
-    #     if commen.parent != None:
-    #         commen.parent.childe = commen
-    #         # print(type(commen.parent))
-    #         add_Childeren(commen.parent)
-
-    #     return
-
-    # for com in comments_parent:
-    #     likeComment = LikesCustomerComment.objects.filter(user=request.user,CustomerComment=com).first()
-    #     if likeComment is not None:
-    #         com.isLike =True
-    #     else:
-    #         com.isLike =False
-    #     add_Childeren(com)
-    #     # if com.parent != None:
-    #     print("=====")
-    #     print(com)
-    #     com.parent.childe = com
-    #     print(com.parent.childe)
-
-    # print(comments_parent[0].parent.childe)
-
-    # for coment in comments_all:
-    #     likeComment = LikesCustomerComment.objects.filter(user=request.user,CustomerComment=coment).first()
-    #     # print(type(coment))
-    #     if likeComment is not None:
-    #         coment.isLike =True
-    #         # coment.annotate(isLike =True)
-    #     else:
-    #         coment.isLike =False
-    #         # coment.annotate(isLike =False)
-    #     # print(coment.isLike)
-    #     coment.save()
-
-    # print(comments_all)
-
-    # comments = comments_all.filter(parent__isnull=True).values()
-
-    # print(comments[0])
-
-
-
+# childe
+    test_cats = ProductCategory.objects.all()
+    #! این فیلتر اشتباه است از سر فرصت درست شود
+    best_sellers = Product.objects.all().filter(active=True).order_by('-visit_count')[0:10]
+    random_products = Product.objects.order_by('?')[:5]
+    # print(random_producr)
     if product is None or not product.active:
         raise Http404('محصول مورد نظر یافت نشد')
     
     product.visit_count += 1
     product.save()
-
-
-    related_products = Product.objects.get_queryset().filter(categories__product=product).distinct()
-
-    # grouped_related_products = list(my_grouper(3, related_products))
+    # print(test_cat)
+    # print(product.categories.all()[0].children.all())
 
     galleries = ProductGallery.objects.filter(product_id=selected_product_id)
 
@@ -129,9 +73,9 @@ def product_detail(request, *args, **kwargs):
         'product': product,
         'galleries' : galleries_idx,
         'comments' : comments,
-        # 'comments_parent' : comments_parent,
-        'related_products' : related_products,
-        # 'customercomments' : customercomments,
+        'best_sellers' : best_sellers,
+        # 'related_products' : related_products,
+        'random_products' : random_products,
 
 
     }   
@@ -161,6 +105,10 @@ class ProductListByCategory(ListView):
     def get_queryset(self):
         category_name = self.kwargs['category_name']
         category = ProductCategory.objects.filter(name__iexact=category_name).first()
+        # #! in dorost shavad
+        # print("category.children")
+        # print(category)
+        # print(category.children.all().first())
         if category is None:
             raise Http404('صفحه ی مورد نظر یافت نشد')
         return Product.objects.get_products_by_category(category_name)
