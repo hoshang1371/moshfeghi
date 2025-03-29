@@ -29,8 +29,43 @@ export function getCookie(name) {
     }
     return cookieValue;
 }
-// const csrftoken = getCookie('csrftoken');
-// console.log("csrftoken");
-// console.log(csrftoken);
+//!===================================================
+var cateNavs= document.querySelectorAll(".sub-menu>li>.right>a");
+var cateNavlefts= document.querySelectorAll(".sub-menu>li>.left");
+cateNavs.forEach(cateNav=>{
+    cateNav.addEventListener("mouseover", function(){
+        var cateId = cateNav.querySelector("input").value
+        cateNavlefts.forEach(cateNavleft=>{
+            var cateNavleftsId = cateNavleft.querySelector("input").value
+            if(cateId == cateNavleftsId){
+                cateNavleft.style.display = 'grid';
+            }
+            else{
+                cateNavleft.style.display = 'none';
+            }
+        })
+    });
+});
+//!===================================================
+var header_cart= document.querySelector(".header_cart>a");
+var popup_order= document.querySelector(".popup_order");
+var popup_order_right= document.querySelector(".popup_order_right");
+var popup_order_close= document.querySelector(".popup_order_left_top>i");
+header_cart.addEventListener("click", function(e){
+    e.stopPropagation()
+    popup_order.classList.remove("popup_order_none")
+    popup_order.classList.add("popup_order_block")
+}, false);
+popup_order_right.addEventListener("click", function(e){
+    e.stopPropagation()
+    popup_order.classList.remove("popup_order_block")
+    popup_order.classList.add("popup_order_none")  
+}, false);
+
+popup_order_close.addEventListener("click", function(e){
+    e.stopPropagation()
+    popup_order.classList.remove("popup_order_block")
+    popup_order.classList.add("popup_order_none")  
+}, false);
 //!===================================================
 

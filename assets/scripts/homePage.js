@@ -29,3 +29,9 @@ comps.forEach(comp => {
     })
 
 });
+
+// !=============================================================
+let rActiveItenNav = document.querySelectorAll(".sf-menu>li")
+rActiveItenNav[1].classList.remove("active")
+rActiveItenNav[0].classList.add("active")
+// !=============================================================

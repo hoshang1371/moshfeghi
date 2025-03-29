@@ -14,19 +14,24 @@
             <!-- <ul class="sub-menu" style="float: none; width: 19.4615em; display: none;"> -->
             <ul class="sub-menu">
             
-                {% for category in categorys %}
-                <li class="first firstItem" style="white-space: normal; float: none; width: 100%;"><a class="first" href="/products/{{ category.name }}" style="float: none; width: auto;">{{ category.title }}</a></li>
-                {% endfor %}
-            
-                <!-- <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/hard-drives" style="float: none; width: auto;">مقاومت</a></li>
-            
-                <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/keyboards-mice" style="float: none; width: auto;">خازن</a></li>
-            
-                <li class="" style="white-space: normal; float: none; width: 100%;"><a class="" href="/collections/cpus" style="float: none; width: auto;">سلف</a></li>
-            
-                <li class="last lastItem" style="white-space: normal; float: none; width: 100%;"><a class="last" href="/collections/accessories" style="float: none; width: auto;">رگولاتور</a></li>
-             -->
-            
+                <li class="first firstItem" style="white-space: normal; float: none; width: 100%;">
+                        <div class="right">
+                            {% for category in categorys %}
+                            <a class="first" href="/products/{{ category.name }}" style="float: none; width: auto;">
+                                <input type="hidden" value="{{category.id}}">
+                                {{ category.title }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                            {% for category in categorys %}
+                            <div class="left">
+                                <input type="hidden" value="{{category.id}}">
+                                {% for cat in category.children.all %}
+                                    <a href="/products/{{ cat.name }}">{{cat.title}}</a>
+                                {% endfor %}
+                            </div>
+                            {% endfor %}
+                </li>
             </ul>
             
         </li>
@@ -44,14 +49,22 @@
             
         </li>
         
-        </ul><select class="menu_mobile">
-            <option value="https://tm-shopify034-computers.myshopify.com/" selected="selected">خانه</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/all">محصولات</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/monitors">-دیود</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/hard-drives">-مقاومت</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/keyboards-mice">-خازن</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/cpus">-سلف</option>
-            <option value="https://tm-shopify034-computers.myshopify.com/collections/accessories">-رگولاتور</option>
+        </ul>
+        <select class="menu_mobile" name='m-menu' onchange='location = this.options[this.selectedIndex].value;'>
+            <option value="/" >خانه</option>
+            <option value="{% url 'product_list' %}" class="optionGroup">
+                محصولات
+            </option>
+            {% for category in categorys %}
+            <option value="/products/{{ category.name }}" fooData="{{category.id}}" class="optionChild">
+                &nbsp;&nbsp;&nbsp;-{{category.title}}
+            </option>
+            {% for cat in category.children.all %}
+            <option value="/products/{{ cat.name }}" fooData="{{cat.id}}" class="optionChild">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-{{cat.title}}
+            </option>
+            {% endfor %}
+            {% endfor %}
             <option value="https://tm-shopify034-computers.myshopify.com/pages/about-us">درباره ما</option>
             <option value="https://tm-shopify034-computers.myshopify.com/pages/contact-us">ارتباط با ما</option>
         </select>

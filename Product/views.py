@@ -117,7 +117,7 @@ class ProductListByCategory(ListView):
         category_name = self.kwargs['category_name']
         category = ProductCategory.objects.filter(name__iexact=category_name).first()
         context = super(ProductListByCategory, self).get_context_data(**kwargs)
-        context['header'] = category.title
+        context['header'] = category
         # context['setting'] =SiteSetting.objects.first()
         return context
     

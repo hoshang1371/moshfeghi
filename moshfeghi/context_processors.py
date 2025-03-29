@@ -6,9 +6,11 @@ from moshfeghi_setting.models import SiteSetting
 
 def custom_context_processor(request):
     # Define your context variables here
-    # categorys = ProductCategory.objects.all()
+    # categorys = ProductCategory.objects.all() 
     categorys = ProductCategory.objects.filter(parent__isnull=True)
     site_setting = SiteSetting.objects.first()
+    # for category in categorys:
+    #     print(category.children.all())
     # print(f"categorys ={categorys}")
     return {
         'categorys': categorys,
