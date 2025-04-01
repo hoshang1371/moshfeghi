@@ -15,7 +15,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import convert_numbers
 from random import randint
-
+from django.db.models import Q
 # from django import template
 # from django.template.defaultfilters import stringfilter
 
@@ -98,20 +98,51 @@ class ProductList(ListView):
         # context['setting'] =SiteSetting.objects.first()
         return context
     
+
+
+# def get_all_children(self, include_self=True):
+#     r = []
+#     if include_self:
+#         r.append(self)
+#     for c in ProductCategory.objects.filter(parent=self):
+#         _r = c.get_all_children(include_self=True)
+#         if 0 < len(_r):
+#             r.extend(_r)
+#     return r
+ 
+# def get_all_children(self, container=None):
+#     if container is None:
+#         container = []
+#     result = container
+#     for child in self.children.all():
+#         result.append(child)
+#         if child.children.count() > 0:
+#             child.get_all_children(result)
+#     return result
+
 class ProductListByCategory(ListView):
     template_name = 'products_list.html'
     paginate_by = 8
 
+
+
     def get_queryset(self):
         category_name = self.kwargs['category_name']
         category = ProductCategory.objects.filter(name__iexact=category_name).first()
-        # #! in dorost shavad
-        # print("category.children")
+        #! in dorost shavad
+        print("category.children")
         # print(category)
-        # print(category.children.all().first())
+        cat_list = category.get_all_children()
+        print(cat_list)
+
+        my_filter_qs = Q()
+        for creator in cat_list:
+            my_filter_qs = my_filter_qs | Q(categories=creator ,active=True)
+
         if category is None:
             raise Http404('صفحه ی مورد نظر یافت نشد')
-        return Product.objects.get_products_by_category(category_name)
+        # return Product.objects.get_products_by_category(category_name)
+        return Product.objects.filter(my_filter_qs).all()
 
     def get_context_data(self, **kwargs):
         category_name = self.kwargs['category_name']

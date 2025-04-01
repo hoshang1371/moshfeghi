@@ -19,3 +19,13 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_all_children(self, container=None):
+        if container is None:
+            container = []
+        result = container
+        for child in self.children.all():
+            result.append(child)
+            if child.children.count() > 0:
+                child.get_all_children(result)
+        return result
