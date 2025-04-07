@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from Product.models import CustomerComment, LikesCustomerComment, Product, ProductGallery
 from Product.serializers import CustomerCommentSerializer, DeleteCustomerCommentSerializer, LikesCustomerCommentSerializer
 from moshfegh_products_category.models import ProductCategory
+from moshfeghi_order.forms import UserNewOrderForm
 from moshfeghi_setting.models import SiteSetting
 from django.http import Http404, request
 
@@ -34,16 +35,20 @@ def my_grouper(n, iterable):
 #     return comment.isLiked.filter(user=request.user).first()
 
 # Create your views here.
+# from moshfeghi_order.forms import CustomersCommentsForm
+
 def product_detail(request, *args, **kwargs):
 
     selected_product_id = kwargs['productId']
     product_name = kwargs['name']
 
+    new_order_form = UserNewOrderForm(request.POST or None, initial={'product_id': selected_product_id})
+
     # TODO
 
     product = Product.objects.get_by_id(selected_product_id)
     comments = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=True)
-# childe
+    # contact_form_comment = CustomersCommentsForm(request.POST or None)
     test_cats = ProductCategory.objects.all()
     #! این فیلتر اشتباه است از سر فرصت درست شود
     best_sellers = Product.objects.all().filter(active=True).order_by('-visit_count')[0:10]
@@ -74,9 +79,8 @@ def product_detail(request, *args, **kwargs):
         'galleries' : galleries_idx,
         'comments' : comments,
         'best_sellers' : best_sellers,
-        # 'related_products' : related_products,
         'random_products' : random_products,
-
+        'new_order_form' : new_order_form,
 
     }   
 

@@ -15,42 +15,21 @@
           <p>سبد خرید</p>
         </div>
         <div class="items">
+          {% for orderDetail in orderDetails %}
           <div class="product_order_comp">
             <div>
-              <img src="{% static 'Images/showcase1_img.jpg' %}">
+              <img src="{{orderDetail.product.image.url}}">
             </div>
             <div>
               <a href="">اپل</a>
-              <p class="money  ToPersian">10000 تومان<span>&times;10</span></p>
+              <p class="money  ToPersian">{{orderDetail.price}} تومان<span>&times;{{orderDetail.count}}</span></p>
             </div>
             <div>
               <i class="fa fa-trash" aria-hidden="true"></i>
             </div>
           </div>
-          <div class="product_order_comp">
-            <div>
-              <img src="{% static 'Images/showcase1_img.jpg' %}">
-            </div>
-            <div>
-              <a href="">اپل</a>
-              <p class="money  ToPersian">10000 تومان<span>&times;10</span></p>
-            </div>
-            <div>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="product_order_comp">
-            <div>
-              <img src="{% static 'Images/showcase1_img.jpg' %}">
-            </div>
-            <div>
-              <a href="">اپل</a>
-              <p class="money  ToPersian">10000 تومان<span>&times;10</span></p>
-            </div>
-            <div>
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </div>
-          </div>
+          {% endfor %}
+
 
           <div class="product_total">
             <p class="ToPersian">4 کالا در سبد خرید شما</p>
@@ -108,7 +87,7 @@
         <div class="col-sm-7 col-md-8 col-lg-9">
           <!-- LOGO -->
            <div id="logo">
-            <a href="">
+            <a href="/">
               <span>{{site_setting.title}}</span>
             </a>
            </div>
@@ -124,9 +103,9 @@
             </form>
           </div>
           <div class="header_cart">
-            <a>
+            <a>    
               <i class="fa-solid fa-cart-shopping"></i>
-              <span class="cart-total-items"><span class="count">0</span></span>
+              <span class="cart-total-items"><span class="count ToPersian">{{totalCount}}</span></span>
               <span>عدد</span>
             </a>
           </div>

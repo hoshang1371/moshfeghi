@@ -41,19 +41,21 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
     'django_render_partial',
+    
     # 'members',
     'bootstrap5',
     'fontawesomefree',
     'captcha',
     'rest_framework',
     # 'alluth.socialaccount.providers.google',
-    
+
     "homePage",
     "Product",
     "moshfegh_products_category",

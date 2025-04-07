@@ -82,7 +82,9 @@
                 <div class="col-sm-7">
 
                   <div itemprop="name" class="product_name"> {{product.title}} </div>
-                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="form-horizontal" id="product-actions">
+                  <form action="/order/add-user-order" method="post" enctype="multipart/form-data" class="form-horizontal" id="product-actions">
+                    {% csrf_token %}
+                    {{ new_order_form.product_id }}
                     <div class="options clearfix"> 
       
                       <div id="product_price">
@@ -108,7 +110,8 @@
                         <label for="quantity">عدد: </label>
                         <!-- <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small ToPersianValue">    -->
                          <div>
-                           <input min="1" id="quantity" name="quantity" value="1" class="form-control input-small ToPersianValue">
+                           <!-- <input min="1" id="quantity" name="quantity" value="1" class="form-control input-small ToPersianValue"> -->
+                           {{ new_order_form.count }}
                            <div>
                              <a class="BCdown">&#11206;</a>
                              <a class="BCup">&#11205;</a>
@@ -217,5 +220,57 @@
 </div>
 
 <script src="{% static 'js/productDetails.js' %}" type="module" ></script>
+
+{% comment %}
+{% if messages %}
+{% for message in messages %}
+{% if message.tags %}
+<script>
+  popup_success(3000,"{{ message }}")
+</script>
+{% endif %}
+
+{% endfor %}
+{% endif %}
+{% endcomment %}
+
+
+{% if messages %}
+<script>
+  let popup_alert = document.querySelector(".popup_alert")
+</script>
+    {% for message in messages %}
+
+
+        {% if message.tags == 'success' %}
+        <script>
+          popup_alert.querySelector("div>div>p").innerHTML = "{{ message }}"
+          if (popup_alert.classList.contains("success"))
+              popup_alert.classList.remove("success")
+          else{
+              popup_alert.classList.add("success")
+              const timeoutId = setTimeout(() => {
+                  popup_alert.classList.remove("success")
+              }, 3000);
+          }
+        </script>   
+        {% endif %}
+        {% if message.tags == 'warning' %}
+        <script>
+          popup_alert.querySelector("div>div>p").innerHTML = "{{ message }}"
+          if (popup_alert.classList.contains("warning"))
+              popup_alert.classList.remove("warning")
+          else{
+              popup_alert.classList.add("warning")
+              const timeoutId = setTimeout(() => {
+                  popup_alert.classList.remove("warning")
+              }, 3000);
+          }
+        </script>   
+        {% endif %}
+        {% endfor %}
+{% endif %}
+
+
 
 {% endblock %}

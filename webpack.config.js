@@ -6,7 +6,8 @@ module.exports ={
       './index':'./assets/scripts/index.js',
       './homePage':'./assets/scripts/homePage.js',
       './productDetails':'./assets/scripts/productDetails.js',
-      './products_list':'./assets/scripts/products_list.js'
+      './products_list':'./assets/scripts/products_list.js',
+      // './popup':'./assets/scripts/popup.js'
     },
     output: {
         // publicPath:'http://127.0.0.1:8080/',

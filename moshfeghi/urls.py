@@ -37,6 +37,7 @@ urlpatterns = [
         name='about_page_header'),
     path('products/',include('Product.urls')),
     path('new_account/',include('new_account.urls')),
+    path('order/',include('moshfeghi_order.urls')),
 ]
 
 urlpatterns += [
