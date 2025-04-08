@@ -149,6 +149,7 @@ form {
 }
 .header_cart a {
   color: var(--blue)!important;
+  cursor: pointer;
 }
 
 .header_cart a i {

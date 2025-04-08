@@ -12,12 +12,12 @@ def custom_context_processor(request):
     site_setting = SiteSetting.objects.first()
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     orderDetails = OrderDetail.objects.filter(order=order)
-    print(f"order={order}")
-    print(f"orderDetails={orderDetails}")
+    # print(f"order={order}")
+    # print(f"orderDetails={orderDetails}")
     totalCount = 0
     for orderDetail in orderDetails:
         totalCount += orderDetail.count 
-        # print(totalCount)
+    # print(totalCount)
     # print(f"categorys ={categorys}")
     return {
         'categorys': categorys,

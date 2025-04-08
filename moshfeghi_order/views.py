@@ -7,6 +7,19 @@ from moshfeghi_order.forms import UserNewOrderForm
 from moshfeghi_order.models import Order
 from django.contrib import messages
 
+from moshfeghi_order.serializer import DeleteOrderDetailSerializer
+from .models import Order,OrderDetail
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+
+from rest_framework.generics import (
+    ListAPIView,
+    ListCreateAPIView, 
+    # RetrieveAPIView, 
+    # RetrieveUpdateDestroyAPIView,
+    DestroyAPIView,
+    UpdateAPIView
+    )
+
 @login_required(login_url='/login')
 def add_user_order(request):
     # print("hojjat")
@@ -40,3 +53,9 @@ def add_user_order(request):
         return redirect(f'/products/{product.id}/{product.title.replace(" ","-")}')
 
     return redirect('/')
+
+
+class DeleteOrderDetail(DestroyAPIView):
+    queryset = OrderDetail.objects.all()
+    serializer_class = DeleteOrderDetailSerializer
+    permission_classes = [IsAuthenticated]

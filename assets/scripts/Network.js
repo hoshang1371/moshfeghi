@@ -59,3 +59,18 @@ export async function liked_comment(token,comment_id) {
 
     return resData;
 }
+
+
+export async function delete_OrderDetails(id,token) {
+    const response = await fetch((`${url}order/Delete_product_orderDetail/${id}/`), {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': token,
+        }
+    });
+    // const resData = 'resource deleted...';
+    const resData = await response;
+
+    return resData;
+}

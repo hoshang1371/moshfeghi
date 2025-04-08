@@ -25,6 +25,7 @@
               <p class="money  ToPersian">{{orderDetail.price}} تومان<span>&times;{{orderDetail.count}}</span></p>
             </div>
             <div>
+              <input type="hidden" value="{{orderDetail.id}}">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </div>
           </div>
@@ -32,7 +33,7 @@
 
 
           <div class="product_total">
-            <p class="ToPersian">4 کالا در سبد خرید شما</p>
+            <p class="ToPersian">{{totalCount}} کالا در سبد خرید شما</p>
             <div>
               <p>جمع کالا ها</p>
               <p class="money  ToPersian">1000 تومان</p>

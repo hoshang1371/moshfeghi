@@ -7,6 +7,10 @@ import '../styles/logIn.css'
 import '../styles/product_list.css'
 
 import './numberOfPersian.js'
+import { popup_success,popup_warning } from './popup.js';
+
+import { delete_OrderDetails } from './Network.js';
+const csrftoken = getCookie('csrftoken');
 // import './homePage.js'
 
 // import * as css from "../styles/homePage.css";
@@ -67,5 +71,24 @@ popup_order_close.addEventListener("click", function(e){
     popup_order.classList.remove("popup_order_block")
     popup_order.classList.add("popup_order_none")  
 }, false);
+
 //!===================================================
 
+var product_order_comps_delete = document.querySelectorAll(".product_order_comp>div>i")
+product_order_comps_delete.forEach(product_order_comp=>{
+    product_order_comp.addEventListener("click", function(){
+        var delet_orderDetail_id =product_order_comp.parentElement.querySelector("input").value
+        // console.log(product_order_comp.parentElement.parentElement.remove())
+
+        delete_OrderDetails(delet_orderDetail_id, csrftoken).then(data => {
+            if(data.status==204){
+                product_order_comp.parentElement.parentElement.remove()
+                popup_success(3000,"محصول مورد نظر حذف شد")
+            }
+            else{
+
+                popup_warning(3000,"مشکلی بوجود امده است");
+            }
+        });
+    });
+})
