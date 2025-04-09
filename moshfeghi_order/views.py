@@ -59,3 +59,33 @@ class DeleteOrderDetail(DestroyAPIView):
     queryset = OrderDetail.objects.all()
     serializer_class = DeleteOrderDetailSerializer
     permission_classes = [IsAuthenticated]
+
+@login_required(login_url='/login')
+def List_user_open_order(request):
+    # print("kir khar")
+    # logger.warning('Homepage was accessed at '+str(datetime.datetime.now())+' hours!')
+
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order_partials_buy = order.orderdetail_set.all()
+    # post_price = PostPrice.objects.filter().first()
+    # print("post_price=",post_price.price)
+    # print(order_partials_buy)
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+    count_off_all_product =0
+
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    username = request.user.username
+    # site_setting = SiteSetting.objects.first()
+
+    contex = {
+        'username' : username,
+        'order_partials_buy': order_partials_buy,
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+        # 'post_price': post_price.price,
+        'count_off_all_product': count_off_all_product,
+    }
+    return render(request ,'list_of_buy.html',contex)

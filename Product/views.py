@@ -47,13 +47,13 @@ def product_detail(request, *args, **kwargs):
     # TODO
 
     product = Product.objects.get_by_id(selected_product_id)
-    comments = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=True)
+    comments = CustomerComment.objects.filter(CommentProduct=product,parent__isnull=True).order_by('-created')
     # contact_form_comment = CustomersCommentsForm(request.POST or None)
     test_cats = ProductCategory.objects.all()
     #! این فیلتر اشتباه است از سر فرصت درست شود
     best_sellers = Product.objects.all().filter(active=True).order_by('-visit_count')[0:10]
     random_products = Product.objects.order_by('?')[:5]
-    # print(random_producr)
+    print(f"comments={reversed(comments)}")
     if product is None or not product.active:
         raise Http404('محصول مورد نظر یافت نشد')
     
