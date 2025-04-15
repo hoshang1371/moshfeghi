@@ -8,6 +8,7 @@ from moshfeghi_order.models import Order
 from django.contrib import messages
 
 from moshfeghi_order.serializer import DeleteOrderDetailSerializer
+from moshfeghi_post_info.models import PostPrice
 from .models import Order,OrderDetail
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
@@ -67,7 +68,7 @@ def List_user_open_order(request):
 
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()
-    # post_price = PostPrice.objects.filter().first()
+    post_price = PostPrice.objects.filter().first()
     # print("post_price=",post_price.price)
     # print(order_partials_buy)
     #order_partials = OrderDetail.objects.all()
@@ -79,13 +80,12 @@ def List_user_open_order(request):
         Total_price_for_each_product_buy = order_partial.count * order_partial.price
         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
     username = request.user.username
-    # site_setting = SiteSetting.objects.first()
 
     contex = {
         'username' : username,
         'order_partials_buy': order_partials_buy,
         'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
-        # 'post_price': post_price.price,
+        'post_price': post_price.price,
         'count_off_all_product': count_off_all_product,
     }
     return render(request ,'list_of_buy.html',contex)

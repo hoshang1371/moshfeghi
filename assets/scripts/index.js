@@ -1,10 +1,13 @@
 
 import '../styles/homePage.css'
 import '../styles/style.css'
-import '../styles/product_detail.css'
 import '../styles/logIn.css'
 
 import '../styles/product_list.css'
+
+import '../styles/product_detail.css'
+
+// import '../styles/list_of_buy.css'
 
 import './numberOfPersian.js'
 import { popup_success,popup_warning } from './popup.js';

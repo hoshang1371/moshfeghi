@@ -1,0 +1,88 @@
+{% extends 'shared/_MainLayout.html' %} {% load static %} {% block content %}
+
+<div id="main" role="main">
+    <div class="container">
+      <div class="row sidebar_right sidebar_off">
+        <div class="column_center">
+          <div id="main_content" class="col-sm-12">
+            <div class="index-scope">
+              <div class="OrderContent">
+                <div class="row">
+                    <div class="orderList col-sm-10">
+                        <div class="row">
+                            <h2 class="col" style="border: none;">سبد خرید</h2>
+                            <div class="col">
+                                <span class="btn btn-cart">خالی کردن سبد خرید&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+                        <div class="content_order row">
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <img src="{% static 'Images/img_3.webp' %}">
+                            </div>
+                            <div class="col d-flex flex-column justify-content-center align-items-center">
+                                <a href="">ماژول تغذیه سوئیچینگ 5 ولت جریان ثابت 1A نسل 7</a>
+                                <span class=" p-2 ToPersian">1,060,000‎ تومان</span>
+                                <span class=" p-2 ToPersian">کد کالا 1010</span>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <div id="purchase"> 
+                                    <label for="quantity">عدد:&nbsp&nbsp</label>
+                                     <div>
+                                       <input min="1" value="1" class="form-control input-small ToPersianValue">
+                                       <div>
+                                         <a class="BCdown">&#11206;</a>
+                                         <a class="BCup">&#11205;</a>
+                                       </div>
+            
+                                     </div>             
+                                  </div>
+                            </div>
+                            <div class="col Prce d-flex justify-content-center align-items-center">
+                                <span class="ToPersian">4000 &nbsp;تومان</span>
+                            </div>
+                            <div class="col remove_item d-flex justify-content-center align-items-center">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="content_order row">
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <img src="{% static 'Images/img_3.webp' %}">
+                            </div>
+                            <div class="col d-flex flex-column justify-content-center align-items-center">
+                                <a href="">ماژول تغذیه سوئیچینگ 5 ولت جریان ثابت 1A نسل 7</a>
+                                <span class=" p-2 ToPersian">1,060,000‎ تومان</span>
+                                <span class=" p-2 ToPersian">کد کالا 1010</span>
+                            </div>
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <div id="purchase"> 
+                                    <label for="quantity">عدد:&nbsp&nbsp</label>
+                                     <div>
+                                       <input min="1" value="1" class="form-control input-small ToPersianValue">
+                                       <div>
+                                         <a class="BCdown">&#11206;</a>
+                                         <a class="BCup">&#11205;</a>
+                                       </div>
+            
+                                     </div>             
+                                  </div>
+                            </div>
+                            <div class="col Prce d-flex justify-content-center align-items-center">
+                                <span class="ToPersian">4000 &nbsp;تومان</span>
+                            </div>
+                            <div class="col remove_item d-flex justify-content-center align-items-center">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orderPrice col-sm-2">gfgf</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
+
+{% endblock %}

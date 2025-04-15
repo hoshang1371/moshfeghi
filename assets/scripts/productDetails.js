@@ -2,6 +2,7 @@ import { getCookie } from './index.js';
 import { delete_comment,add_comment,liked_comment } from './Network.js';
 import { popup_success,popup_warning } from './popup.js';
 
+
 const csrftoken = getCookie('csrftoken');
 // console.log(csrftoken)
 let product_id = document.querySelector('.product-scope>input');

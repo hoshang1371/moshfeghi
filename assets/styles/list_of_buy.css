@@ -1,0 +1,87 @@
+/* .OrderContent{
+    width: 100%;
+    height: 100rem;
+} */
+
+/* .OrderContent .orderList{   
+    width: 70%;
+    background-color: blue;
+    height: 100%;
+} */
+
+.OrderContent .orderPrice{
+    /* width: 30%; */
+    background-color: green;
+    height: 100%;
+}
+
+.orderList>div:first-child>h2{
+    font: 300 25px Gandom;
+}
+
+.orderList>div:first-child>div{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    
+}
+
+.orderList>div:first-child>div>span{
+    color: var(--white2);
+    background: #ce492b !important;
+    transition: background .3s ease;
+    font-size: 0.8rem;
+    font-family: gandom;
+}
+.orderList>div:first-child>div>span:hover{
+    background: var(--blue) !important;
+}
+
+.orderList>div:first-child {
+    margin: 0;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #dddddd;
+    font:Gandom;
+    color: #333;
+}
+
+.content_order{
+    margin: 0;
+    padding: 0 0 10px;
+    border-bottom: 2px solid #dddddd;
+}
+
+.content_order>div{
+    padding: 1rem;
+}
+.content_order>div>img{
+    height: 10rem;
+    width: 10rem;
+}
+
+#purchase>div>input {
+    border: none!important;
+    padding: 0!important;
+    text-align: center!important;
+}
+#purchase>label{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: gandom;
+}
+#purchase>div
+{
+    margin: 0!important;
+}
+.Prce span{
+    color: var(--red);
+    font-size: 1.1rem;
+}
+.remove_item i{
+    cursor: pointer;
+}
+
+.remove_item i:hover{
+    color: var(--red);
+}

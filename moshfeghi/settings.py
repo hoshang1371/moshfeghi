@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     "moshfeghi_slider",
     "moshfeghi_setting",
     "moshfeghi_order",
+    "moshfeghi_post_info",
 ]
 
 MIDDLEWARE = [
