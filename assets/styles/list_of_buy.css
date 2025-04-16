@@ -11,8 +11,41 @@
 
 .OrderContent .orderPrice{
     /* width: 30%; */
-    background-color: green;
     height: 100%;
+}
+.OrderContent .orderPrice h3{
+    text-align: center;
+    padding: 1rem;
+    font-family: gandom;
+    font-weight: bold;
+}
+.OrderContent .orderPrice>div>div:first-child{
+    margin-top: 2rem;
+}
+.OrderContent .orderPrice>div>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.OrderContent .orderPrice>div:nth-child(2)
+{
+    border-bottom: 1px solid #dddddd;
+}
+.OrderContent .orderPrice>div:last-child>div
+{
+    font-weight: bold;
+    font-family: Gandom;
+}
+.OrderContent .orderPrice>div:last-child>div>label
+{
+    font-size: 1rem;
+}
+.OrderContent .orderPrice>div:last-child>span{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 3rem;
 }
 
 .orderList>div:first-child>h2{
@@ -26,14 +59,19 @@
     
 }
 
-.orderList>div:first-child>div>span{
+.orderList>div:first-child>div>span,
+.OrderContent .orderPrice>div:last-child>span
+
+{
     color: var(--white2);
     background: #ce492b !important;
     transition: background .3s ease;
     font-size: 0.8rem;
     font-family: gandom;
 }
-.orderList>div:first-child>div>span:hover{
+.orderList>div:first-child>div>span:hover,
+.OrderContent .orderPrice>div:last-child>span:hover
+{
     background: var(--blue) !important;
 }
 
