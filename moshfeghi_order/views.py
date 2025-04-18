@@ -47,7 +47,12 @@ def add_user_order(request):
             messages.warning(request, 'این کالا در سبد خرید موجوداست.')
             return redirect(f'/products/{product.id}/{product.title.replace(" ","-")}')
         else :
-            order.orderdetail_set.create(product_id=product.id, price=product.price ,count=count)
+            # print(f"product.priceOff={product.priceOff}")
+            if product.priceOff == None:
+                order.orderdetail_set.create(product_id=product.id, price=(int(product.price)*int(count)) ,count=count)
+            else:
+                order.orderdetail_set.create(product_id=product.id, price=(int(product.priceOff)*int(count)) ,count=count)
+
         # todo: redirect user to user panel
         messages.success(request, "محصول مورد نظر به سبد خرید اضافه شد.")       
         # return redirect('/products')
@@ -70,7 +75,7 @@ def List_user_open_order(request):
     order_partials_buy = order.orderdetail_set.all()
     post_price = PostPrice.objects.filter().first()
     # print("post_price=",post_price.price)
-    # print(order_partials_buy)
+    # print(f"order_partials_buy={order_partials_buy}")
     #order_partials = OrderDetail.objects.all()
     Total_price_for_all_product_buy =0
     count_off_all_product =0

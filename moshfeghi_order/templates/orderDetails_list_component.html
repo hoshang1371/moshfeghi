@@ -1,0 +1,37 @@
+{% load static %} {% load render_partial %} {% block content %}
+
+<div class="content_order row">
+    <div class="col d-flex justify-content-center align-items-center">
+        <img src="{{orderDetial.product.image.url}}">
+    </div>
+    <div class="col d-flex flex-column justify-content-center align-items-center">
+        <a href="">{{orderDetial.product.title}}</a>
+        {% if orderDetial.product.priceOff != NaN %}
+        <span class=" p-2 money_khat ToPersian">{{orderDetial.product.price}}‎ تومان</span>
+        <span class=" p-2 money ToPersian">{{orderDetial.product.priceOff}}‎ تومان</span>
+        {% else %}
+        <span class=" p-2 money ToPersian">{{orderDetial.product.price}}‎ تومان</span>
+        {%endif%}
+        <span class=" p-2 ToPersian">کد کالا {{orderDetial.product.code}}</span>
+    </div>
+    <div class="col d-flex justify-content-center align-items-center">
+        <div id="purchase"> 
+            <label for="quantity">عدد:&nbsp&nbsp</label>
+             <div>
+               <input min="1" value="{{orderDetial.count}}" class="form-control input-small ToPersianValue">
+               <div>
+                 <a class="BCdown">&#11206;</a>
+                 <a class="BCup">&#11205;</a>
+               </div>
+
+             </div>             
+          </div>
+    </div>
+    <div class="col Prce d-flex justify-content-center align-items-center">
+        <span class="ToPersian">{{orderDetial.price}} &nbsp;تومان</span>
+    </div>
+    <div class="col remove_item d-flex justify-content-center align-items-center">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+    </div>
+</div>
+{% endblock %}

@@ -53,7 +53,7 @@ def product_detail(request, *args, **kwargs):
     #! این فیلتر اشتباه است از سر فرصت درست شود
     best_sellers = Product.objects.all().filter(active=True).order_by('-visit_count')[0:10]
     random_products = Product.objects.order_by('?')[:5]
-    print(f"comments={reversed(comments)}")
+    # print(f"comments={reversed(comments)}")
     if product is None or not product.active:
         raise Http404('محصول مورد نظر یافت نشد')
     

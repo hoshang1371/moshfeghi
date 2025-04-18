@@ -15,81 +15,26 @@
                                 <span class="btn btn-cart">خالی کردن سبد خرید&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span>
                             </div>
                         </div>
-                        <div class="content_order row">
-                            <div class="col d-flex justify-content-center align-items-center">
-                                <img src="{% static 'Images/img_3.webp' %}">
-                            </div>
-                            <div class="col d-flex flex-column justify-content-center align-items-center">
-                                <a href="">ماژول تغذیه سوئیچینگ 5 ولت جریان ثابت 1A نسل 7</a>
-                                <span class=" p-2 ToPersian">1,060,000‎ تومان</span>
-                                <span class=" p-2 ToPersian">کد کالا 1010</span>
-                            </div>
-                            <div class="col d-flex justify-content-center align-items-center">
-                                <div id="purchase"> 
-                                    <label for="quantity">عدد:&nbsp&nbsp</label>
-                                     <div>
-                                       <input min="1" value="1" class="form-control input-small ToPersianValue">
-                                       <div>
-                                         <a class="BCdown">&#11206;</a>
-                                         <a class="BCup">&#11205;</a>
-                                       </div>
-            
-                                     </div>             
-                                  </div>
-                            </div>
-                            <div class="col Prce d-flex justify-content-center align-items-center">
-                                <span class="ToPersian">4000 &nbsp;تومان</span>
-                            </div>
-                            <div class="col remove_item d-flex justify-content-center align-items-center">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="content_order row">
-                            <div class="col d-flex justify-content-center align-items-center">
-                                <img src="{% static 'Images/img_3.webp' %}">
-                            </div>
-                            <div class="col d-flex flex-column justify-content-center align-items-center">
-                                <a href="">ماژول تغذیه سوئیچینگ 5 ولت جریان ثابت 1A نسل 7</a>
-                                <span class=" p-2 ToPersian">1,060,000‎ تومان</span>
-                                <span class=" p-2 ToPersian">کد کالا 1010</span>
-                            </div>
-                            <div class="col d-flex justify-content-center align-items-center">
-                                <div id="purchase"> 
-                                    <label for="quantity">عدد:&nbsp&nbsp</label>
-                                     <div>
-                                       <input min="1" value="1" class="form-control input-small ToPersianValue">
-                                       <div>
-                                         <a class="BCdown">&#11206;</a>
-                                         <a class="BCup">&#11205;</a>
-                                       </div>
-            
-                                     </div>             
-                                  </div>
-                            </div>
-                            <div class="col Prce d-flex justify-content-center align-items-center">
-                                <span class="ToPersian">4000 &nbsp;تومان</span>
-                            </div>
-                            <div class="col remove_item d-flex justify-content-center align-items-center">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </div>
-                        </div>
+                        {% for order_partials_buy_ in order_partials_buy%}
+                          {% include 'orderDetails_list_component.html' with orderDetial=order_partials_buy_%}
+                        {% endfor %}
                     </div>
                     <div class="orderPrice col-sm-3">
-                      <h3>4 کالا در سبد خرید شما</h3>
+                      <h3 class="ToPersian">{{count_off_all_product}} کالا در سبد خرید شما</h3>
                       <div>
                         <div>
                           <label>جمع کالا ها</label>
-                          <span class="ToPersian">2,956,000‎ تومان</span>
+                          <span class="ToPersian">{{Total_price_for_all_product_buy}}‎ تومان</span>
                         </div>
                         <div>
                           <label>هزینه بسته بندی</label>
-                          <span class="ToPersian">2,956,000‎ تومان</span>
+                          <span class="ToPersian">{{post_price}}‎ تومان</span>
                         </div>
                       </div>
                       <div>
                         <div>
                           <label>مجموع </label>
-                          <span class="ToPersian">2,956,000‎ تومان</span>
+                          <span class="ToPersian">{{Total_price_for_all_product_buy|add:post_price}}‎ تومان</span>
                         </div>
                         <span class="btn btn-cart">ادامه و پرداخت</span>
 

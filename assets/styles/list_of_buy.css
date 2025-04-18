@@ -123,3 +123,19 @@
 .remove_item i:hover{
     color: var(--red);
 }
+
+.money_khat {
+    font-family: Gandom;
+    text-decoration: line-through;
+    padding: 0!important;
+    font-size: 0.8rem!important;;
+    display: block;
+    margin-top: 2rem;
+}
+
+.money {
+    color: var(--red);
+    font-family: Gandom;
+    font-size: 1rem!important;
+    padding: 37px 0 0;
+  }
