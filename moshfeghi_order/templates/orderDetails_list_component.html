@@ -15,11 +15,12 @@
         <span class=" p-2 ToPersian">کد کالا {{orderDetial.product.code}}</span>
     </div>
     <div class="col d-flex justify-content-center align-items-center">
-        <div id="purchase"> 
+        <div id="purchase">
             <label for="quantity">عدد:&nbsp&nbsp</label>
              <div>
                <input min="1" value="{{orderDetial.count}}" class="form-control input-small ToPersianValue">
                <div>
+                <input type="hidden" value="{{orderDetial.id}}">
                  <a class="BCdown">&#11206;</a>
                  <a class="BCup">&#11205;</a>
                </div>
@@ -28,9 +29,12 @@
           </div>
     </div>
     <div class="col Prce d-flex justify-content-center align-items-center">
-        <span class="ToPersian">{{orderDetial.price}} &nbsp;تومان</span>
+        <span class="ToPersian">
+            {{orderDetial.price}} &nbsp;تومان
+        </span>
     </div>
     <div class="col remove_item d-flex justify-content-center align-items-center">
+        <input type="hidden" value="{{orderDetial.id}}">
         <i class="fa fa-trash" aria-hidden="true"></i>
     </div>
 </div>

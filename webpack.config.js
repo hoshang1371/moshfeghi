@@ -7,6 +7,7 @@ module.exports ={
       './homePage':'./assets/scripts/homePage.js',
       './productDetails':'./assets/scripts/productDetails.js',
       './products_list':'./assets/scripts/products_list.js',
+      './list_of_buy':'./assets/scripts/list_of_buy.js',
       './list_of_buy_css':'./assets/styles/list_of_buy.css',
     },
     output: {

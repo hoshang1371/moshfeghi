@@ -13,6 +13,7 @@ import './numberOfPersian.js'
 import { popup_success,popup_warning } from './popup.js';
 
 import { delete_OrderDetails } from './Network.js';
+
 const csrftoken = getCookie('csrftoken');
 // import './homePage.js'
 

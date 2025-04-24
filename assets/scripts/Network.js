@@ -74,3 +74,36 @@ export async function delete_OrderDetails(id,token) {
 
     return resData;
 }
+
+export async function delete_OrderDetails_All(token) {
+    const response = await fetch((`${url}order/Order_product_delete_list_of_buy`), {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': token,
+        }
+    });
+    // const resData = 'resource deleted...';
+    const resData = await response;
+
+    return resData;
+}
+
+export async function sendToOrderDetails(token,id,count) {
+    let data = {
+        id : id,
+        count : count
+    };
+    const response = await fetch((`${url}order/update_for_buy/`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': token,
+        },
+        body: JSON.stringify(data)
+    });
+    // const resData = 'resource deleted...';
+    const resData = await response;
+
+    return resData;
+}
