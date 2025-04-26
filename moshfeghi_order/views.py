@@ -7,7 +7,7 @@ from moshfeghi_order.forms import UserNewOrderForm
 from moshfeghi_order.models import Order
 from django.contrib import messages
 
-from moshfeghi_order.serializer import DeleteOrderDetailSerializer, OrderProductDeleteListOfBuySerializer, OrderProductSerializerForListOfbuy
+from moshfeghi_order.serializer import DeleteOrderDetailSerializer, OrderProductDeleteListOfBuySerializer, OrderProductSerializer, OrderProductSerializerForListOfbuy
 from moshfeghi_post_info.models import PostPrice
 from .models import Order,OrderDetail
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -84,8 +84,10 @@ def List_user_open_order(request):
 
     for order_partial in order_partials_buy:
         count_off_all_product = count_off_all_product+1
-        Total_price_for_each_product_buy = order_partial.count * order_partial.price
-        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+        # print(order_partial.price)
+        # Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        # Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + order_partial.price
     username = request.user.username
 
     contex = {
@@ -193,3 +195,44 @@ class product_order_List_buy(UpdateAPIView):
 
         return JsonResponse(response, safe=False)
         return JsonResponse({"response":"ok"}, safe=False)
+
+
+
+class product_orders_details_List_buy(UpdateAPIView):
+    queryset = OrderDetail.objects.all()
+    serializer_class = OrderProductSerializerForListOfbuy
+    permission_classes = [IsAuthenticated]
+    def put(self, request, *args, **kwargs):
+        user =  request.user
+        order = Order.objects.filter(owner=user,is_paid=False).first()
+        # print(f"user={user}")
+        # print(f"order={order}")
+        # print(request.data)
+        orderDetailsRes = request.data 
+        # for orderDeRes in orderDetailsRes:
+        #     print(orderDeRes)
+        orderDetails =order.orderdetail_set.all()
+        
+        
+
+
+        # errorData =[]
+        # print(f"orderDetails={orderDetails}")
+        # print(f"orderDetailsRes={orderDetailsRes}")
+        for orderDe,orderDeRes in zip(orderDetails,orderDetailsRes):
+            # print(f"orderDeRes['count']={orderDeRes['count']}")
+            # print(f"orderDe={orderDe}")
+            if int(orderDeRes['count']) < 1:
+                orderDeRes['count'] = "1"
+
+            if orderDe.product.priceOff is None:
+                orderDe.price = (int(orderDeRes['count'])*orderDe.product.price)
+            else:
+                orderDe.price = (int(orderDeRes['count'])*orderDe.product.priceOff)
+            orderDe.count = orderDeRes['count']
+            orderDe.save()
+        serializer = OrderProductSerializer(orderDetails, many=True)
+        # return JsonResponse({"response":"ok"}, safe=False)
+        return Response(serializer.data)
+
+   

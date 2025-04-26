@@ -1,16 +1,17 @@
 import { popup_success,popup_warning,add_popup_loading,remove_popup_loading } from './popup.js';
 
-import { delete_OrderDetails,delete_OrderDetails_All,sendToOrderDetails } from './Network.js';
+import { delete_OrderDetails,delete_OrderDetails_All,sendToOrderDetails,sendAllToOrderDetails } from './Network.js';
 
 import { getCookie } from './index.js';
 
 
 const csrftoken = getCookie('csrftoken');
 
+// let numberToPersianValue = document.querySelectorAll('.ToPersianValue');
 // !================================================================
 
 let remove_items= document.querySelectorAll(".remove_item i")
-remove_items.forEach(remove_item=>{
+remove_items.forEach((remove_item,index)=>{
     remove_item.addEventListener("click", function(){
         var delet_orderDetail_id =remove_item.parentElement.querySelector("input").value
 
@@ -18,6 +19,8 @@ remove_items.forEach(remove_item=>{
         add_popup_loading();
                 delete_OrderDetails(delet_orderDetail_id, csrftoken).then(data => {
                     if(data.status==204){
+                        // numberToPersianValue[index].remove()
+                        // console.log(numberToPersianValue[index])
                         remove_item.parentElement.parentElement.remove()
                         popup_success(3000,"محصول مورد نظر حذف شد")
                     }
@@ -201,3 +204,53 @@ BCdowns.forEach((BCdown,i)=>{
     });
 });
 // !========================================================
+let update = document.querySelector(".update button");
+update.addEventListener("click", function(){
+    // ! bayad be dakhell tabee ravad
+    var sendData = []
+    let numberToSend = document.querySelectorAll('.ToPersianValue');
+    // console.log(numberToPersianValue)
+    numberToSend.forEach(ent=>{
+        // let id = ent.parentElement.querySelector("div>input[type='hidden']").value
+        // console.log(ent)
+        // console.log(ent.value.toString().toEnglishDigit());
+        let dictionary = {};
+        dictionary["id"] = ent.parentElement.querySelector("div>input[type='hidden']").value;
+        dictionary["count"] = ent.value.toString().toEnglishDigit();
+        // console.log(typeof(dictionary));
+        // console.log(dictionary);
+        sendData.push(dictionary);
+        
+        // console.log("===========================")
+        
+    })
+    // console.log(sendData);
+    // console.log(typeof(sendData));
+
+    sendAllToOrderDetails(csrftoken,sendData).then(async data => {
+        const dataEnd = await data.json();
+        let orderDetails = dataEnd
+        // console.log(dataEnd)
+        // console.log(data.status)
+        if(data.status == 200){
+            var totalPrice = 0;
+            orderDetails.forEach((orderdetail,index)=>{
+                if(numberToSend[index] == undefined){
+                    location.reload();
+                }
+                totalPrice = totalPrice + orderdetail.price
+                numberToSend[index].value = orderdetail.count.toString().toPersinaDigit()
+                // console.log(orderdetail.count.toString().toPersinaDigit()); 
+                numberToSend[index].parentElement.parentElement.parentElement.parentElement.querySelector(".Prce>span").innerHTML=`${orderdetail.price.toString().toPersinaDigit()} &nbsp;تومان`;
+                // console.log(orderdetail.price);
+                // console.log(numberToPersianValue[index] == undefined);
+            });
+            document.querySelector(".totla_price").innerHTML = `${totalPrice.toString().toPersinaDigit()}‎ تومان`
+            let sendPrice =parseInt(document.querySelector(".sendPrice").innerHTML.split(" ")[0].toEnglishDigit())
+            // console.log(sendPrice+totalPrice);
+            document.querySelector(".total").innerHTML = `${(sendPrice+totalPrice).toString().toPersinaDigit()}‎ تومان`
+            // document.querySelector(".total").innerHTML = `${dataEnd.Total_price_postPrice.toString().toPersinaDigit()}‎ تومان`
+        }
+    });
+})
+// .update button

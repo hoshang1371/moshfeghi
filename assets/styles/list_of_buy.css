@@ -138,4 +138,17 @@
     font-family: Gandom;
     font-size: 1rem!important;
     padding: 37px 0 0;
-  }
+}
+.update{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.update button{
+    margin: 1rem;
+    width: auto;
+    height: 37px;
+    padding: 0 15px;
+    vertical-align: top;
+    font-family: Gandom;
+}

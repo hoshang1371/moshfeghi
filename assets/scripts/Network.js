@@ -107,3 +107,23 @@ export async function sendToOrderDetails(token,id,count) {
 
     return resData;
 }
+
+
+export async function sendAllToOrderDetails(token,sendData) {
+    // let data = {
+    //     id : id,
+    //     count : count
+    // };
+    const response = await fetch((`${url}order/product_orders_details_List_buy/`), {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': token,
+        },
+        body: JSON.stringify(sendData)
+    });
+    // const resData = 'resource deleted...';
+    const resData = await response;
+
+    return resData;
+}

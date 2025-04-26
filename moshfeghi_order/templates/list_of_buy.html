@@ -18,6 +18,9 @@
                         {% for order_partials_buy_ in order_partials_buy%}
                           {% include 'orderDetails_list_component.html' with orderDetial=order_partials_buy_%}
                         {% endfor %}
+                        <div class="row update">
+                          <button class="btn btn-success" type="button">به روز رسانی</button>
+                        </div>
                     </div>
                     <div class="orderPrice col-sm-3">
                       <h3 class="ToPersian">{{count_off_all_product}} کالا در سبد خرید شما</h3>
@@ -28,7 +31,7 @@
                         </div>
                         <div>
                           <label>هزینه بسته بندی</label>
-                          <span class="ToPersian">{{post_price}}‎ تومان</span>
+                          <span class="ToPersian sendPrice">{{post_price}}‎ تومان</span>
                         </div>
                       </div>
                       <div>
