@@ -715,6 +715,7 @@ box-shadow: 0 0 12px #0000001a;
   z-index: 102;
   /* transition: width 1s; */
   animation: width-in 1s;
+  overflow-y: auto;
 }
 
 .popup_order>.popup_order_right{

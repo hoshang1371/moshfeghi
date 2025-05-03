@@ -38,6 +38,8 @@ urlpatterns = [
     path('products/',include('Product.urls')),
     path('new_account/',include('new_account.urls')),
     path('order/',include('moshfeghi_order.urls')),
+    path('post_info/',include('moshfeghi_post_info.urls')),
+
 ]
 
 urlpatterns += [

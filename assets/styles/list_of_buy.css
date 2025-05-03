@@ -60,7 +60,8 @@
 }
 
 .orderList>div:first-child>div>span,
-.OrderContent .orderPrice>div:last-child>span
+.OrderContent .orderPrice>div:last-child>span,
+.OrderContent .orderPrice>div:last-child>a
 
 {
     color: var(--white2);
@@ -69,8 +70,12 @@
     font-size: 0.8rem;
     font-family: gandom;
 }
+.OrderContent .orderPrice>div:last-child>a{
+    width: 100%;
+}
 .orderList>div:first-child>div>span:hover,
-.OrderContent .orderPrice>div:last-child>span:hover
+/* .OrderContent .orderPrice>div:last-child>span:hover */
+.OrderContent .orderPrice>div:last-child>a:hover
 {
     background: var(--blue) !important;
 }

@@ -1,0 +1,113 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+<div id="main" role="main">
+    <div class="container">
+      <div class="row sidebar_right sidebar_off">
+        <div class="column_center">
+          <div id="main_content" class="col-sm-12">
+            <div class="index-scope">
+              <div class="OrderContent">
+                <div class="row">
+                    <div class="orderList col-sm-9">
+                      <form method="post" action="{% url 'add_userPostAddressDetail' %}">
+                            {% csrf_token %} 
+                        <div class="row header_post_order">
+                            <h2 class="col" style="border: none;">نشانی ارسال</h2>
+                        </div>
+                        <div class="postList row row-cols-sm-2">
+                          {% for userForm,postAddressUser in zipee %}
+                            <div class="postDetails col">
+                                <div class="pDTop">
+                                    <div>
+                                      {{userForm.tag}}
+                                      <input type="hidden" value="{{postAddressUser.id}}">
+                                        <span>نشانی من</span>
+                                    </div>
+                                    <div>
+                                        <p>ویرایش</p>
+                                        <span>|</span>
+                                        <p>حذف</p>
+                                    </div>
+                                </div>
+
+                                <div class="pDBottom">
+                                    <div class="">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <a class="ToPersian">
+                                          <p>       
+                                            {{postAddressUser.get_country_display}}
+                                        </p>
+                                        <span>،</span>
+                                        <p>       
+                                            {{postAddressUser.city}}
+                                        </p>
+                                        <span>،</span>
+                                        <p class="ToPersian">       
+                                            {{postAddressUser.address}}
+                                        </p>
+                                        </a>
+                                    </div>
+                                    <div>
+                                      <i class="fa fa-user" aria-hidden="true"></i>
+                                      <a>
+                                        <span>{{postAddressUser.firstName}}</span>
+                                        <span>{{postAddressUser.lastName}}</span> 
+                                      </a>
+                                    </div>
+                                    <div>
+                                      <i class="fa fa-envelope" aria-hidden="true"></i>
+                                      <a class="ToPersian">{{postAddressUser.post_code}}</a>
+                                    </div>
+                                    <div>
+                                      <i class="fa fa-mobile" aria-hidden="true"></i>
+                                      <a class="ToPersian">{{postAddressUser.mobile_phone_number}}</a>
+                                    </div>
+                                    <div>
+                                      <i class="fa fa-phone" aria-hidden="true"></i>
+                                      <a class="ToPersian">{{postAddressUser.phone_number}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                          {% endfor %}
+                        </div>
+                        <div class="row update">
+                          <button class="btn btn-success" type="button"> افزودن آدرس جدید </button>
+                        </div>
+
+                    </div>
+                    <div class="orderPrice col-sm-3">
+                      <h3 class="ToPersian">{{count_off_all_product}} کالا در سبد خرید شما</h3>
+                      <div>
+                        <div>
+                          <label>جمع کالا ها</label>
+                          <span class="totla_price ToPersian">{{Total_price_for_all_product_buy}}‎ تومان</span>
+                        </div>
+                        <div>
+                          <label>هزینه بسته بندی</label>
+                          <span class="ToPersian sendPrice">{{post_price}}‎ تومان</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <label>مجموع </label>
+                          <span class="total ToPersian">{{Total_price_for_all_product_buy|add:post_price}}‎ تومان</span>
+                        </div>
+                        <!-- <span class="btn btn-cart">ادامه و پرداخت</span> -->
+                        <!-- <a class="btn btn-cart" href="{% url 'post_order' %}">ادامه و پرداخت</a> -->
+                        <input class="continue btn btn-cart" type="submit" value="ادامه">
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
+<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>
+<script src="{% static 'js/post_order.js' %}" type="module" ></script>
+{% endblock %}

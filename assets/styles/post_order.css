@@ -1,0 +1,87 @@
+/* .postList
+{
+    height: 25rem;
+} */
+
+.postList>.postDetails>.pDTop
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Gandom;
+    border-bottom: 1px solid #dddddd;
+
+}
+.postList>.postDetails>.pDTop>div{
+    display: flex;
+    align-items: center;
+}
+
+.postList>.postDetails>.pDTop>div:first-child>span{
+    margin-right: 1rem;
+    font-weight: bold;
+}
+
+.postList>.postDetails>.pDTop>div:last-child>p
+{
+    margin-top: revert;
+    /* padding:5px; */
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.postList>.postDetails>.pDTop>div:last-child>span{
+    color: var(--grey3);
+}
+.postList>.postDetails>.pDTop>div:last-child>p:hover
+{
+    color: var(--red);
+}
+.postList>.postDetails
+{
+    margin-top: 1rem;
+    padding: 1rem;
+}
+.pDBottom>div{
+    display: flex;
+}
+.pDBottom>div:first-child{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pDBottom>div:first-child>i{
+    width: auto;
+    color: var(--red);
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+.pDBottom>div>i{
+    width: auto;
+    color: var(--grey3);
+    font-size: 0.8rem;
+    margin-left: 4px;
+}
+
+.pDBottom>div>a{
+    display: flex;
+    color: var(--black2);
+    font-family: Gandom;
+}
+.continue{
+    width: 100%;
+    color: var(--white2);
+}
+
+.continue:hover{
+    color: var(--white2);
+}
+
+.orderList>form>.header_post_order>h2 {
+    font: 300 25px Gandom;
+}
+
+@media (max-width: 767px) {
+    .orderList>form>.header_post_order>h2{
+        text-align: center;
+    }
+}

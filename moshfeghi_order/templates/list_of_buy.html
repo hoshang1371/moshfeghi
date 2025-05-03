@@ -39,8 +39,8 @@
                           <label>مجموع </label>
                           <span class="total ToPersian">{{Total_price_for_all_product_buy|add:post_price}}‎ تومان</span>
                         </div>
-                        <span class="btn btn-cart">ادامه و پرداخت</span>
-
+                        <!-- <span class="btn btn-cart">ادامه و پرداخت</span> -->
+                        <a class="btn btn-cart" href="{% url 'post_order' %}">ادامه و پرداخت</a>
                       </div>
                     </div>
                 </div>
