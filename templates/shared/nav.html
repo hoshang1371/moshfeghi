@@ -1,7 +1,7 @@
 {% load static %}
 <div id="navigation" style="position: sticky; top: 0px;">
     <div class="container">
-    <nav role="navigation">
+    <nav role="navigation" class="nave">
         <ul class="sf-menu visible-lg sf-js-enabled sf-arrows">
 
         <li class="first active firstItem">
@@ -50,6 +50,13 @@
         </li>
         
         </ul>
+        <!-- <div class="header_cart">
+            <a>    
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="cart-total-items"><span class="count ToPersian">{{totalCount}}</span></span>
+              <span>عدد</span>
+            </a>
+          </div> -->
         <select class="menu_mobile" name='m-menu' onchange='location = this.options[this.selectedIndex].value;'>
             <option value="/" >خانه</option>
             <option value="{% url 'product_list' %}" class="optionGroup">

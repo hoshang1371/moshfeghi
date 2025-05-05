@@ -4,7 +4,10 @@ from django.contrib.auth.decorators import login_required
 from moshfeghi_order.models import Order
 from moshfeghi_post_info.forms import CarrierChoices, UserPostAddressDetailForm
 from moshfeghi_post_info.models import PostAddress, PostAddressDetail, PostPrice
-
+from moshfeghi_post_info.serializer import PostAddressDeleteListOfBuySerializer
+from rest_framework.generics import DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication
 # Create your views here.
 @login_required(login_url='/login')
 def post_order(request):
@@ -119,3 +122,13 @@ def add_userPostAddressDetail(request):
         
     }
     return render(request ,'add_userAdressDetail.html',contex)
+
+
+#! delete PostAddress detail
+class PostAddress_delete_list_of_buy(DestroyAPIView):
+    queryset = PostAddress.objects.all()
+    #queryset = Order.objects.filter(owner_id= request.user.id, is_paid=False).first()
+    #queryset = OrderDetail.objects.all()
+    serializer_class = PostAddressDeleteListOfBuySerializer
+    permission_classes = [IsAuthenticated]
+    authentication_classes = (SessionAuthentication, )

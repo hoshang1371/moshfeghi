@@ -4,6 +4,7 @@ const csrftoken = getCookie('csrftoken');
 
 const url ="http://127.0.0.1:8000/"
 
+const delete_listOfPostAddress_list = url+"post_info/PostAddress_delete_list_of_buy/"
 
 export async function delete_comment(id,token) {
     const response = await fetch((`${url}products/api/DeleteCustomerComment/${id}/`), {
@@ -127,3 +128,16 @@ export async function sendAllToOrderDetails(token,sendData) {
 
     return resData;
 }
+
+export async function delete_listOfPostAddress(id,token) {
+    const response = await fetch((delete_listOfPostAddress_list+id), {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'X-CSRFToken': token,
+        }
+    });
+    // const resData = 'resource deleted...';
+    const resData = await response;
+    return resData;
+  }

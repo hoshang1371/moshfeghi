@@ -22,13 +22,13 @@
                                 <div class="pDTop">
                                     <div>
                                       {{userForm.tag}}
-                                      <input type="hidden" value="{{postAddressUser.id}}">
-                                        <span>نشانی من</span>
+                                      <span>نشانی من</span>
                                     </div>
                                     <div>
-                                        <p>ویرایش</p>
+                                        <input type="hidden" value="{{postAddressUser.id}}">
+                                        <p class="EditePost">ویرایش</p>
                                         <span>|</span>
-                                        <p>حذف</p>
+                                        <p class="DeletePostAdress">حذف</p>
                                     </div>
                                 </div>
 
@@ -73,7 +73,7 @@
                           {% endfor %}
                         </div>
                         <div class="row update">
-                          <button class="btn btn-success" type="button"> افزودن آدرس جدید </button>
+                          <button class="btn btn-success buttonEdite" type="button"> افزودن آدرس جدید </button>
                         </div>
 
                     </div>
