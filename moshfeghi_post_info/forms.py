@@ -53,8 +53,12 @@ class AddAddress(forms.Form):
     )
 
     Country_for_post = forms.ChoiceField(
+        widget=forms.Select(attrs={
+            'class' : 'form-control rtl'
+        }),
         choices=Country,
         label='کشور',
+        
         )
 
     City_for_post = forms.CharField(
@@ -69,6 +73,7 @@ class AddAddress(forms.Form):
         widget=forms.Textarea(
         attrs={
             'placeholder':'لطفاً آدرس خود را وارد نمایید ',
+            'class' : 'form-control rtl'
         }
         ),
         label=' آدرس '
@@ -126,6 +131,7 @@ class AddAddress(forms.Form):
         widget=forms.TextInput(attrs={
             'placeholder':'لطفاً کد پستی خود را وارد نمایید ',
             'type':'number',
+            'class' : 'form-control rtl',
             }),
         label=' کد پستی '
         )

@@ -1,0 +1,92 @@
+
+/* .header_add_post_order{
+    background-color: red;
+} */
+
+.header_add_post_order>h2
+{
+    font: 300 25px Gandom;
+}
+
+.field{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.field>div {
+    width: 2rem;
+}
+
+.field>div>span{
+    color: var(--grey3);
+}
+
+.field input,
+.field select
+{
+    width: 50%;
+}
+
+.field>.country{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-left: 2rem; */
+}
+
+.field>.country>h2{
+    border: none;
+    font-family: Gandom;
+}
+
+/* .field>.country>span{
+    margin-left: 0.5rem;
+    margin-top: -2px;
+} */
+
+
+textarea {
+    resize: none;
+}
+
+.buttonEdite{
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.buttonEdite p {
+     display: none;
+}
+
+
+
+.field-sabt input{
+    color: var(--white2);
+}
+
+.field_cancel h1{
+    border: none!important;
+    font-size: 1rem;
+    color: var(--black);
+    margin: 0;
+    padding: 0;
+    /* text-decoration: none; */
+}
+
+.field_cancel span{
+    font-size: 1.5em;
+    color: var(--red);
+}
+
+.field_cancel:hover>a>span,
+.field_cancel:hover>a>h1
+{
+    color: var(--blue);
+}
+
+/* .sabtOrCancel{
+    display: flex;
+} */
