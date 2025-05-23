@@ -43,5 +43,6 @@ DeletePostAdressAll.forEach(DeletePostAdress=>{
 var buttonEdite = document.querySelector(".buttonEdite");
 
 buttonEdite.addEventListener("click",function(){
-    console.log(buttonEdite);
+    // console.log(buttonEdite);
+    window.location = "post_add_address"
 });
