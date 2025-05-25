@@ -6,6 +6,7 @@ from moshfeghi_order.models import Order
 from moshfeghi_post_info.forms import AddAddress, CarrierChoices, Country, UserPostAddressDetailForm
 from moshfeghi_post_info.models import PostAddress, PostAddressDetail, PostPrice
 from moshfeghi_post_info.serializer import PostAddressDeleteListOfBuySerializer
+from new_account.models import UserCode
 from rest_framework.generics import DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
@@ -62,6 +63,7 @@ def post_order(request):
 @login_required(login_url='/login')
 def add_userPostAddressDetail(request):
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+
     # postAddressesUser = PostAddress.objects.filter(owner_id=request.user.id)
     user_post_address_detail = UserPostAddressDetailForm(request.POST or None,request.user)#
     carriersChoices = CarrierChoices(request.POST or None,request.user)
@@ -118,10 +120,10 @@ def add_userPostAddressDetail(request):
         Total_price_for_each_product_buy = order_partial.count * order_partial.price
         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
     # print('user_post_address_detail=',user_post_address_detail['PostAddress_id'])
-    username = request.user.username
+    # username = request.user.username
 
     contex ={
-        'username' : username,
+        # 'username' : username,
         # 'user_post_address_detail': user_post_address_detail,
         # 'postAddressesUser' : postAddressesUser,
         'carriersChoices' : carriersChoices['Carrier_field'],
@@ -153,6 +155,8 @@ def post_add_address(request):
     add_address = AddAddress(request.POST or None)
     # global stop_threads_sendSmsVarify
     # stop_threads_sendSmsVarify = True
+    user_code = UserCode.objects.filter(user=user).first()
+    print("kirkhar")
 
     if request.method == 'POST':
         if add_address.is_valid():
@@ -166,11 +170,12 @@ def post_add_address(request):
             mobile_phone_number_for_post = add_address.cleaned_data.get('mobile_phone_number_for_post')
             check_mobile_phone_number_for_post = add_address.cleaned_data.get('check_mobile_phone_number_for_post')
             post_code_for_post = add_address.cleaned_data.get('post_code_for_post')
-            deffTime =int(datetime.datetime.now(datetime.timezone.utc).timestamp()-user.codeVarifySmsDate.timestamp())
+
+            deffTime =int(datetime.datetime.now(datetime.timezone.utc).timestamp()-user_code.codeVarifySmsDate.timestamp())
 
             if(deffTime < 120):
             #! check mobile number
-                if user.codeVarifySms == check_mobile_phone_number_for_post:
+                if user_code.codeVarifySms == check_mobile_phone_number_for_post:
                     PostAddress.objects.create(
                             owner_id= request.user.id,
                             firstName = first_name_for_post,
@@ -191,7 +196,6 @@ def post_add_address(request):
 
 
         
-    username = request.user.username
 
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()
@@ -207,7 +211,6 @@ def post_add_address(request):
         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
 
     contex ={
-        'username' : username,
 
         'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
         'count_off_all_product': count_off_all_product,
@@ -236,11 +239,27 @@ class send_code_for_varify_mobile_address(APIView):
         #globalValue.code = ''
 
         #globalValue.code = random_with_N_digits(5)
-        user.codeVarifySms = random_with_N_digits(5)
-        user.codeVarifySmsDate = datetime.datetime.now(datetime.timezone.utc)
-        user.save()
 
-        sendSms(user.codeVarifySms,mobNumber)
+        user_code = UserCode.objects.filter(user=user).first()
+        print(f"user_code={user_code}")
+        if user_code is None:
+            user_code = UserCode.objects.create(
+                user = user,
+                codeVarifySms = random_with_N_digits(5),
+                codeVarifySmsDate = datetime.datetime.now(datetime.timezone.utc)
+            )
+        else:
+            user_code.codeVarifySms = random_with_N_digits(5)   
+            user_code.codeVarifySmsDate = datetime.datetime.now(datetime.timezone.utc)
+            user_code.save() 
+        # print(user_code.codeVarifySms)
+        # print(user_code.codeVarifySmsDate)
+        
+        # user.UserCode.codeVarifySms = random_with_N_digits(5)
+        # user.UserCode.codeVarifySmsDate = datetime.datetime.now(datetime.timezone.utc)
+        # user.UserCode.save()
+
+        sendSms(user_code.codeVarifySms,mobNumber)
         
         #print('send_code_for_varify_mobile_addressCode=',globalValue.code)
         #global stop_threads_sendSmsVarify
