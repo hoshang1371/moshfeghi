@@ -10,6 +10,7 @@ from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 from .models import UserCode
+# from .models import UserData
 
 # class UserDataAdmin(admin.ModelAdmin):
 #     list_display = ['__str__','choiceField', 'SAL', 'MAH', "ROZ"]
@@ -36,4 +37,5 @@ from .models import UserCode
 #                                ),
 #           )
 admin.site.register(UserCode)
+
 # admin.site.register(UserData,UserDataAdmin)

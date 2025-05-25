@@ -1,6 +1,7 @@
 from django.db import models
 
 
+# <<<<<<< HEAD
 # from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -20,6 +21,18 @@ class UserCode(models.Model):
     )
     codeVarifySms = models.CharField( max_length=5,blank = True, null = True,verbose_name='کد تایید پیامکی')
     codeVarifySmsDate = models.DateTimeField(blank = True, null = True,verbose_name='زمان تایید پیامکی')
+from django.contrib.auth.models import AbstractUser
+
+
+
+# class User(AbstractUser):
+#     # email = models.EmailField(unique=True,verbose_name="ایمیل")
+#     codeVarifySms = models.CharField( max_length=5,blank = True, null = True,verbose_name='کد تایید پیامکی')
+#     codeVarifySmsDate = models.DateTimeField(blank = True, null = True,verbose_name='زمان تایید پیامکی')
+
+    # is_author = models.BooleanField(default=False,verbose_name="ok")
+
+# >>>>>>> 5ec16611e5647a9ff147278dfd78c2a9ecc7f6b2
 
 
 # class UserData(models.Model):
