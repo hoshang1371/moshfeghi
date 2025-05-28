@@ -11,7 +11,8 @@ var EditePostAll = document.querySelectorAll(".EditePost");
 
 EditePostAll.forEach(EditePost=>{
     EditePost.addEventListener("click",function(){
-        console.log(EditePost);
+        // console.log(EditePost.previousElementSibling.value);
+        window.location = `edit_post_add_address/${EditePost.previousElementSibling.value}`
         
     });
 });

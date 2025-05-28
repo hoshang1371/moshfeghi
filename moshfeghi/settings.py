@@ -66,11 +66,7 @@ INSTALLED_APPS = [
     "moshfeghi_order",
     "moshfeghi_post_info",
 ]
-<<<<<<< HEAD
 # AUTH_USER_MODEL = 'new_account.User'
-=======
-AUTH_USER_MODEL = 'new_account.User'
->>>>>>> 5ec16611e5647a9ff147278dfd78c2a9ecc7f6b2
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
