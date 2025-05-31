@@ -30,7 +30,7 @@ def post_order(request):
     # if request.method == 'POST':
     if user_post_address_detail.is_valid():
         product_id = user_post_address_detail.cleaned_data.get('PostAddress_id')
-        print('product_id=',product_id)
+        # print('product_id=',product_id)
     #!
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order_partials_buy = order.orderdetail_set.all()

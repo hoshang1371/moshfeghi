@@ -76,12 +76,12 @@
     color: var(--white2);
 }
 
-.orderList>form>.header_post_order>h2 {
+.orderList>form>.header_post_order>h2{
     font: 300 25px Gandom;
 }
 
 @media (max-width: 767px) {
-    .orderList>form>.header_post_order>h2{
+    .orderList>form>.header_post_order>h2    {
         text-align: center;
     }
 }

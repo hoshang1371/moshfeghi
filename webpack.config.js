@@ -10,9 +10,11 @@ module.exports ={
       './list_of_buy':'./assets/scripts/list_of_buy.js',
       './list_of_buy_css':'./assets/styles/list_of_buy.css',
       './post_order':'./assets/scripts/post_order.js',
+      './add_post_address':'./assets/scripts/add_post_address.js',
+      
       './post_order_css':'./assets/styles/post_order.css',
       './add_post_address_css':'./assets/styles/add_post_address.css',
-      './add_post_address':'./assets/scripts/add_post_address.js',
+      './add_userAdressDetail_css':'./assets/styles/add_userAdressDetail.css',
     },
     output: {
         // publicPath:'http://127.0.0.1:8080/',

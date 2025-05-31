@@ -12,13 +12,14 @@
               <div class="OrderContent">
                 <div class="row">
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 orderList">
                         
                         <form method="post" action="{% url 'paymentMethod' %}">
                                 {% csrf_token %}
                                 <div class="right">
-                                    <div>
-                                        <p>روش ارسال</p>
+
+                                    <div class="row header_add_post_order">
+                                      <h2 class="col" style="border: none;">روش ارسال</h2>
                                     </div>
                                     <div class="khat"></div>
 
@@ -26,15 +27,16 @@
                                     <div class="item_for_carriers">
                                         {{carriersChoice.tag}}
                                         <div>
-
-                                            {% if 'پست' in carriersChoice.data.label %}
-                                            <img src="{% static 'images/post.jpg' %}" alt="">
-                                            {% elif 'تیپاکس' in carriersChoice.data.label %}
-                                            <img src="{% static 'images/tipax.png' %}" alt="">
-                                            {% elif 'باربری' in carriersChoice.data.label %}
-                                            <img src="{% static 'images/bar_bari.jpg' %}" alt="">
-                                            {% endif %}
-                                            <p>
+                                            <div>
+                                              {% if 'پست' in carriersChoice.data.label %}
+                                              <img src="{% static 'images/post.jpg' %}" alt="">
+                                              {% elif 'تیپاکس' in carriersChoice.data.label %}
+                                              <img src="{% static 'images/tipax.png' %}" alt="">
+                                              {% elif 'باربری' in carriersChoice.data.label %}
+                                              <img src="{% static 'images/bar_bari.jpg' %}" alt="">
+                                              {% endif %}
+                                            </div>
+                                            <p class="label">
                                                 {{ carriersChoice.data.label }}
                                             </p>
                                             {% if 'پست' in carriersChoice.data.label %}
@@ -51,25 +53,21 @@
                                                 ارسال در همان روز
                                             </h1>
                                             <p>
-                                                --
+                                                پس کرایه
                                             </p>
                                             {% elif 'باربری' in carriersChoice.data.label %}
                                             <h1>
                                                 ارسال در همان روز
                                             </h1>
                                             <p>
-                                                --
+                                                پس کرایه
                                             </p>
                                             {% endif %}
                                         </div>
 
                                     </div>
-                                    <br>
                                     {% endfor %}
 
-                                    <div>
-                                        <!-- <input type="submit" value="ادامه"> -->
-                                    </div>
                                 </div>
                             
                     </div>
@@ -103,7 +101,9 @@
         </div>
       </div>
     </div>
-    
+
+
 <script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
-<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>
+<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>  
+<script src="{% static 'js/add_userAdressDetail_css.js' %}" type="module" ></script>
 {% endblock %}

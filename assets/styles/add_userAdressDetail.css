@@ -1,0 +1,73 @@
+.header_add_post_order>h2 
+{
+    font: 300 25px Gandom;
+}
+
+@media (max-width: 767px) {
+    .header_add_post_order>h2 
+    {
+        text-align: center;
+    }
+}
+
+.orderList .header_add_post_order{
+    margin: 0;
+    border-bottom: 1px solid #dddddd;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.item_for_carriers{
+    display: flex;
+}
+
+.item_for_carriers>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+    width: 100%;
+    margin-right: 1rem;
+}
+.item_for_carriers:last-child>div{
+    border: none;
+}
+
+.item_for_carriers>div>h1{
+    border: none;
+    font: 1rem Gandom;
+    width: 25%;
+}
+
+.item_for_carriers>div>div{
+    width: 25%;
+}
+
+.item_for_carriers>div>div>img{
+    height: 7rem;
+    
+}
+.item_for_carriers>div>p{
+    width: 25%;
+}
+
+.item_for_carriers>div>.label{
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: gandom;
+}
+
+@media (max-width: 767px) {
+    .item_for_carriers>div>div{
+        width: 100%;
+    }
+    .item_for_carriers>div>p{
+        width: 100%;
+    }
+    .item_for_carriers>div>h1{
+        width: 100%;
+    }
+    .item_for_carriers>div{
+    flex-direction: column;
+    }
+}
