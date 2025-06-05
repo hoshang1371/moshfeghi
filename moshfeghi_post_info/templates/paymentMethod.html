@@ -1,0 +1,82 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="rules RuleNone">
+        <div>
+            <div>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div>
+            {{site_setting.TermsAndRules_field}}
+        </div>
+    </div>
+<div id="main" role="main">
+    <div class="container">
+      <div class="row sidebar_right sidebar_off">
+        <div class="column_center">
+          <div id="main_content" class="col-sm-12">
+            <div class="index-scope">
+              <div class="OrderContent">
+                <div class="row">
+                    <div class="orderList col-sm-9">
+                     <form method="post" action="{% url 'cartToCartPeyment' %}">
+                        {% csrf_token %} 
+                        <div class="list_of_post_info">
+                        <div class="row header_payment">
+                            <h2 class="col" style="border: none;">پرداخت</h2>
+                        </div>
+                            <div class="khat"></div>
+                            <div class="items_for_peyment">
+                                {% for paymentMethod in paymentMethods %}
+                                <div >
+                                    {{ paymentMethod.tag }}
+                                    {{ paymentMethod.data.label }}
+                                </div>
+                                {% endfor %}
+                                <div>
+                                    {{ paymentMethod_isTermsAndRules }}
+                                    <p>من با <a class="RuleOpen">شرایط خدمات </a>موافقم و بی قید و شرط به آنها پایبندم</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="orderPrice col-sm-3">
+                      <h3 class="ToPersian">{{count_off_all_product}} کالا در سبد خرید شما</h3>
+                      <div>
+                        <div>
+                          <label>جمع کالا ها</label>
+                          <span class="totla_price ToPersian">{{Total_price_for_all_product_buy}}‎ تومان</span>
+                        </div>
+                        <div>
+                          <label>هزینه بسته بندی</label>
+                          <span class="ToPersian sendPrice">{{post_price}}‎ تومان</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <label>مجموع </label>
+                          <span class="total ToPersian">{{Total_price_for_all_product_buy|add:post_price}}‎ تومان</span>
+                        </div>
+                        <!-- <span class="btn btn-cart">ادامه و پرداخت</span> -->
+                        <!-- <a class="btn btn-cart" href="{% url 'post_order' %}">ادامه و پرداخت</a> -->
+                        <input class="continue btn btn-cart" type="submit" value="پرداخت">
+                        </form>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
+<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>
+<script src="{% static 'js/paymentMethod_css.js' %}" type="module" ></script>
+<script src="{% static 'js/paymentMethod.js' %}" type="module" ></script>
+
+{% endblock %}

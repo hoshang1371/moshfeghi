@@ -1,0 +1,74 @@
+.RuleNone{
+    display: none;
+}
+
+.RuleShow{
+    display: block;
+}
+
+.RuleOpen
+{
+    cursor: pointer;
+}
+@keyframes example {
+  from {opacity: 0%;}
+  to {opacity: 100%;}
+}
+
+.rules{
+    background-color: var(--white2);
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 8px 0 var(--grey2), 0 6px 20px 0 var(--grey2);
+    z-index: 10;
+    /* transition: width ease-in-out 2s; */
+    animation-name: example;
+    animation-duration: 4s;
+}
+.rules>div:first-child{
+    padding-right: 1rem;
+}
+.rules i{
+    cursor: pointer;
+}
+.rules i:hover{
+    color: var(--red);
+}
+.rules>div:last-child{
+    height: auto;
+    overflow-y: scroll;
+    max-height: 35rem;
+    padding: 1rem;
+}
+
+.header_payment>h2 {
+    font: 300 25px Gandom;
+}
+
+.items_for_peyment>div{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 1rem;
+    height: 5rem;
+    text-align: center;
+    vertical-align: middle;
+}
+.items_for_peyment>div>input{
+    margin-left: 1rem;
+    height: 100%;
+}
+.items_for_peyment>div>p{
+    margin: unset;
+    vertical-align: middle;
+}
+/* .items_for_peyment>div>p>a{
+    height: 100%;
+} */
+
+.items_for_peyment>div:last-child{
+    /* background-color: red; */
+    justify-content: center;
+}

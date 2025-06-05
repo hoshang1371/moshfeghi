@@ -4,8 +4,9 @@ from django.contrib.auth.decorators import login_required
 
 from moshfeghi_order.models import Order
 from moshfeghi_post_info.forms import AddAddress, CarrierChoices, Country, PaymentMethod, UserPostAddressDetailForm
-from moshfeghi_post_info.models import PostAddress, PostAddressDetail, PostPrice
+from moshfeghi_post_info.models import Carrier_CHOICES, PaymentMethodeDetail, PostAddress, PostAddressDetail, PostPrice
 from moshfeghi_post_info.serializer import PostAddressDeleteListOfBuySerializer
+from moshfeghi_setting.models import SiteSetting
 from new_account.models import UserCode
 from rest_framework.generics import DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
@@ -20,6 +21,14 @@ from extentions.sendSmsRandom import random_with_N_digits,sendSmsForVarifyAddres
 User = get_user_model()
 
 from django.contrib import messages
+
+
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes
+from new_account.token import account_activation_token
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -319,9 +328,7 @@ def paymentMethod(request):
 
 
 
-
     contex={
-
         # 'user_post_address_detail': user_post_address_detail,
         # 'postAddressesUser' : postAddressesUser,
         'paymentMethods' : paymentMethod['paymentMethod_field'],
@@ -432,3 +439,113 @@ def edit_post_add_address(request, pk):
     }
     return render(request ,'add_post_address.html',contex)
 
+
+@login_required(login_url='/login')
+def cartToCartPeyment(request):
+    user = User.objects.filter(id=request.user.id)
+    order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    # print('kir khar')
+    # print('order=',order)
+    # if order[0] is None:
+    #  print('kir khar')
+    # order_details = OrderDetail.objects.get_queryset().filter(order=order)
+    paymentMethod = PaymentMethod(request.POST or None,request.user)
+
+    post_address_detail = PostAddressDetail.objects.filter(
+                        OrderDetailSelected =order,
+                        ).first()
+    
+    # print('order_details=',order_details)
+    
+    # print('post_address_detail.carrierDetails=',post_address_detail.carrierDetails)
+    # print('type=',type(post_address_detail.carrierDetails))
+    # print('Carrier_CHOICES=',Carrier_CHOICES[int(post_address_detail.carrierDetails)-1][1])
+    order_partials_buy = order.orderdetail_set.all()
+
+    post_price = PostPrice.objects.filter().first()
+    #order_partials = OrderDetail.objects.all()
+    Total_price_for_all_product_buy =0
+    count_off_all_product =0
+
+    if request.method == 'POST':
+        if paymentMethod.is_valid():
+            PaymentMethod_field = paymentMethod.cleaned_data.get('paymentMethod_field')
+            isTermsAndRules_field = paymentMethod.cleaned_data.get('isTermsAndRules')
+            # print('PaymentMethod_field',PaymentMethod_field)
+            # print('isTermsAndRules_field',isTermsAndRules_field)
+
+            paymentMethodeDetail = PaymentMethodeDetail.objects.filter(
+                    OrderDetailSelected =order,
+                    ).first()
+            print('paymentMethodeDetail=',paymentMethodeDetail)
+
+            if paymentMethodeDetail is None:
+                paymentMethodeDetail = PaymentMethodeDetail.objects.create(
+                    OrderDetailSelected =order,
+                    PaymentDetails=PaymentMethod_field,
+                    isTermsAndRules =isTermsAndRules_field,
+                    ) 
+                
+            else:
+                paymentMethodeDetail.PaymentDetails=PaymentMethod_field
+                paymentMethodeDetail.isTermsAndRules=isTermsAndRules_field
+                paymentMethodeDetail.save()
+
+
+
+        # #* factor baraye email
+        #     for order_partial in order_partials_buy:
+        #         count_off_all_product = count_off_all_product+1
+        #         Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        #         Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+        #     contex = {
+        #         'order_details' : order_partials_buy,
+        #         'total_price_ofProduct' : Total_price_for_all_product_buy,
+        #         'post_price': post_price.price,
+        #     }   
+
+        #     pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
+
+        #     return HttpResponse(pdf_, content_type='application/pdf') 
+        #! 
+            current_site = get_current_site(request)
+        
+            mail_subject = ' فاکتور '
+            message = render_to_string('acc_sendOrderDitails.html', {
+                'user': request.user,
+                'domain': current_site.domain,
+                'uid':urlsafe_base64_encode(force_bytes(request.user.pk)),
+                'token':account_activation_token.make_token(request.user),
+                'order': order,
+                
+            })
+            email = EmailMessage(
+                    mail_subject, message, to=[user[0].email]
+                )
+            
+            # email.content_subtype = 'html'
+            #! فعال شود.
+            email.send()
+
+            print('every thing ok')
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    contex = {
+        'order': order,
+        'order_details' : order_partials_buy,
+
+
+        'total_price_ofProduct' : Total_price_for_all_product_buy,
+        'Total_price_for_all_product_buy' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+        'count_off_all_product': count_off_all_product,
+
+        'carrierDetails' : Carrier_CHOICES[int(post_address_detail.carrierDetails)-1][1],
+
+        'user' : user[0],
+
+    }
+    return render(request ,'cartToCartPeyment.html',contex)
+    

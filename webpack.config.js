@@ -11,10 +11,12 @@ module.exports ={
       './list_of_buy_css':'./assets/styles/list_of_buy.css',
       './post_order':'./assets/scripts/post_order.js',
       './add_post_address':'./assets/scripts/add_post_address.js',
+      './paymentMethod':'./assets/scripts/paymentMethod.js',
       
       './post_order_css':'./assets/styles/post_order.css',
       './add_post_address_css':'./assets/styles/add_post_address.css',
       './add_userAdressDetail_css':'./assets/styles/add_userAdressDetail.css',
+      './paymentMethod_css':'./assets/styles/paymentMethod.css',
     },
     output: {
         // publicPath:'http://127.0.0.1:8080/',
