@@ -1,0 +1,40 @@
+{% extends 'shared/_MainLayout.html' %} 
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+<!-- <div style="position: relative;  background-color: red; z-index: 1000000;" >hojjat shahpar
+</div> -->
+    <div class="content container">
+        <div class="row mt-4">
+
+            <h2 class="col">ثبت اطلاعات پرداخت</h2>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="field mt-4">
+                <div class="user-icon col-sm d-flex justify-content-center">
+                    <span class="fas fa-cash-register"></span>
+                </div>
+                <div class="col-sm d-flex justify-content-center mt-4">
+                    {{ register_payment_information.register_payment }}
+                </div>
+            </div>
+            <br>
+            {% for error in register_payment_information.register_payment.errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+
+            <div class="field d-flex justify-content-center">
+                <input class="continue btn btn-cart" type="submit" value="ثبت اطلاعات">
+            </div>
+            <!-- <button type="submit" class="btn btn-default">ورود</button> -->
+        </form>
+    </div>
+
+<script src="{% static 'js/RegisterPaymentInformation_css.js' %}" type="module" ></script>
+
+{% endblock %}

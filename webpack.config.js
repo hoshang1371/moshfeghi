@@ -19,6 +19,7 @@ module.exports ={
       './add_userAdressDetail_css':'./assets/styles/add_userAdressDetail.css',
       './paymentMethod_css':'./assets/styles/paymentMethod.css',
       './cartToCartPeyment_css':'./assets/styles/cartToCartPeyment.css',
+      './RegisterPaymentInformation_css':'./assets/styles/RegisterPaymentInformation.css',
     },
     output: {
         // publicPath:'http://127.0.0.1:8080/',

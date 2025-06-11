@@ -1,0 +1,16 @@
+
+.content>div>h2 {
+    font: 300 25px Gandom;
+}
+.content>div{
+    border-bottom: 1px solid #dddddd;
+}
+
+
+.user-icon>span{
+    color: var(--red);
+}
+
+.continue {
+    color: var(--white2);
+}
