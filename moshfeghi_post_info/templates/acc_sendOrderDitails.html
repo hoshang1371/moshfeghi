@@ -1,0 +1,20 @@
+{% load static %}
+
+
+{% autoescape off %}
+
+سلام {{ user.username }},
+
+سفارش شما ثبت شد.و بعد از بررسی برای شما ارسال میشود.
+
+جهت دانلود فاکتور کلیک کنید.
+
+http://{{ domain }}{% url 'pdf_factor' order.id %}
+
+
+جهت ثبت شماره پیگیری کلیک کنید.
+
+http://{{ domain }}{% url 'RegisterPaymentInformation' order.id %}
+
+{% endautoescape %}
+ 

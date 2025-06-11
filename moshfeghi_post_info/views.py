@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
 from moshfeghi_order.models import Order
-from moshfeghi_post_info.forms import AddAddress, CarrierChoices, Country, PaymentMethod, UserPostAddressDetailForm
+from moshfeghi_post_info.forms import AddAddress, CarrierChoices, Country, PaymentMethod, RegisterPaymentInformationForm, UserPostAddressDetailForm
 from moshfeghi_post_info.models import Carrier_CHOICES, PaymentMethodeDetail, PostAddress, PostAddressDetail, PostPrice
 from moshfeghi_post_info.serializer import PostAddressDeleteListOfBuySerializer
 from moshfeghi_setting.models import SiteSetting
@@ -29,6 +29,10 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 from new_account.token import account_activation_token
+from django.http import HttpResponse
+
+
+from extentions import pdf
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -444,7 +448,6 @@ def edit_post_add_address(request, pk):
 def cartToCartPeyment(request):
     user = User.objects.filter(id=request.user.id)
     order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
-    # print('kir khar')
     # print('order=',order)
     # if order[0] is None:
     #  print('kir khar')
@@ -491,8 +494,6 @@ def cartToCartPeyment(request):
                 paymentMethodeDetail.isTermsAndRules=isTermsAndRules_field
                 paymentMethodeDetail.save()
 
-
-
         # #* factor baraye email
         #     for order_partial in order_partials_buy:
         #         count_off_all_product = count_off_all_product+1
@@ -507,27 +508,27 @@ def cartToCartPeyment(request):
         #     pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
 
         #     return HttpResponse(pdf_, content_type='application/pdf') 
-        #! 
-            current_site = get_current_site(request)
+        #! faal shavad 
+            # current_site = get_current_site(request)
         
-            mail_subject = ' فاکتور '
-            message = render_to_string('acc_sendOrderDitails.html', {
-                'user': request.user,
-                'domain': current_site.domain,
-                'uid':urlsafe_base64_encode(force_bytes(request.user.pk)),
-                'token':account_activation_token.make_token(request.user),
-                'order': order,
+            # mail_subject = ' فاکتور '
+            # message = render_to_string('acc_sendOrderDitails.html', {
+            #     'user': request.user,
+            #     'domain': current_site.domain,
+            #     'uid':urlsafe_base64_encode(force_bytes(request.user.pk)),
+            #     'token':account_activation_token.make_token(request.user),
+            #     'order': order,
                 
-            })
-            email = EmailMessage(
-                    mail_subject, message, to=[user[0].email]
-                )
+            # })
+            # email = EmailMessage(
+            #         mail_subject, message, to=[user[0].email]
+            #     )
             
-            # email.content_subtype = 'html'
-            #! فعال شود.
-            email.send()
+            # # email.content_subtype = 'html'
+            # #! فعال شود.
+            # email.send()
 
-            print('every thing ok')
+            # print('every thing ok')
     for order_partial in order_partials_buy:
         count_off_all_product = count_off_all_product+1
         Total_price_for_each_product_buy = order_partial.count * order_partial.price
@@ -549,3 +550,61 @@ def cartToCartPeyment(request):
     }
     return render(request ,'cartToCartPeyment.html',contex)
     
+
+@login_required(login_url='/login')
+def pdf_factor(request,pk):
+    # order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
+    order = Order.objects.filter(owner_id= request.user.id,id=pk)
+    # print('order1=',order1[0])
+    # print('order=',order.first())
+    # print('kir khar') 
+    if order.first() is None:
+        return redirect('/login')
+
+    order_partials_buy = order[0].orderdetail_set.all()
+    post_price = PostPrice.objects.filter().first()
+
+    #* factor baraye email
+    count_off_all_product =0
+    Total_price_for_all_product_buy=0
+    for order_partial in order_partials_buy:
+        count_off_all_product = count_off_all_product+1
+        Total_price_for_each_product_buy = order_partial.count * order_partial.price
+        Total_price_for_all_product_buy = Total_price_for_all_product_buy + Total_price_for_each_product_buy
+    contex = {
+        'order_details' : order_partials_buy,
+        'total_price_ofProduct' : Total_price_for_all_product_buy,
+        'post_price': post_price.price,
+    }   
+
+    pdf_ = pdf.html_to_pdf(request,'buyFactor.html',contex )
+
+    return HttpResponse(pdf_, content_type='application/pdf') 
+
+
+
+@login_required(login_url='/login')
+def RegisterPaymentInformation(request,pk):
+    username = request.user.username
+
+    register_payment_information = RegisterPaymentInformationForm(request.POST or None)
+
+    order = Order.objects.filter(owner_id= request.user.id,id=pk)
+    if order.first() is None:
+        return redirect('/login')
+    paymentMethodeDetail = PaymentMethodeDetail.objects.filter(
+                    OrderDetailSelected =order[0],
+            ).first()
+    # print('paymentMethodeDetail=',paymentMethodeDetail)
+
+    if register_payment_information.is_valid():
+        register_payment = register_payment_information.cleaned_data.get('register_payment')
+        print(register_payment)
+        paymentMethodeDetail.peymentCode=register_payment
+        # paymentMethodeDetail.save()
+        return redirect('/post_info/cartToCartPeyment')
+    contex = {
+        'username' : username,
+        'register_payment_information': register_payment_information
+    }
+    return render(request ,'RegisterPaymentInformation.html',contex)

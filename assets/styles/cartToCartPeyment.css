@@ -1,0 +1,46 @@
+.accept_order>div>i{
+    color: var(--red);
+}
+
+.accept_order {
+    border-bottom: 1px solid #dddddd;
+}
+
+.continue{
+    color: var(--white2);
+}
+
+.continue:hover{
+    color: var(--white2);
+}
+
+td,th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bill>p{
+    font-family: Gandom;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--grey3);
+}
+
+.table_None{
+    display: none;
+}
+
+.table_Block{
+    display: block;
+}
+
+@keyframes example {
+  from {opacity: 0%;}
+  /* 50% {height: 500px;} */
+  to {opacity: 100%;}
+}
+
+.bill{
+    animation-name: example;
+    animation-duration: 1s;
+}

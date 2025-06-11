@@ -1,0 +1,101 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="accept_order container mt-5">
+    <div class="row">
+        <i class="far fa-check-circle col-sm d-flex justify-content-center"></i>
+    </div>
+    <p class="col-sm d-flex justify-content-center mt-4">سفارش شما تایید و ثبت شد</p>
+    <div class="col-sm d-flex justify-content-center">
+        <p> یک ایمیل به <span>{{user.email}}</span> ارسال شد </p>
+    </div>
+</div>
+
+<div class="container_cart container">
+    <div class="title_Order_bay">
+        <div class="">
+            <div class="total_ofPrice col-sm d-flex justify-content-center mt-4">
+                    <div> جمع محصولات:&nbsp;&nbsp;</div>
+                    <div><p class="ToPersian">{{ Total_price_for_all_product_buy }}</p></div>
+            </div>
+            <div class="post_price col-sm d-flex justify-content-center">
+                <div> ترابری و جابجایی :&nbsp;&nbsp;</div>
+                <div><p class="ToPersian">{{ post_price }}</p></div>
+            </div>
+            <div class="total col-sm d-flex justify-content-center">
+                <div> مجموع :&nbsp;&nbsp;</div>
+                <div><p class="ToPersian">{{ Total_price_for_all_product_buy|add:post_price}}</p></div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="code_order col-sm d-flex justify-content-center">
+                <div>کد سفارش:&nbsp;&nbsp;</div>
+                <div><p class="ToPersian">{{order.id}}</p></div>
+            </div>
+            <div class="howToSend col-sm d-flex justify-content-center">
+                <div>روش ارسال:&nbsp;&nbsp;</div>
+                <div><p class="ToPersian">{{carrierDetails}}</p></div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <button class="continue btn btn-cart ">مشاهده ی کالاهای خریداری شده</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bill table_None">
+        <p class="d-flex justify-content-center mt-5 mb-4">صورت حساب</p>
+        <table class="table table-bordered">
+              <thead>
+                  <tr>
+                      <!-- Table Head -->
+                      <th scope="col">نام کالا</th>
+                      <th scope="col">تعداد</th>
+                      <th scope="col">قیمت واحد</th>
+                      <th scope="col">جمع قیمت</th>
+                  </tr>
+              </thead>
+              <tbody>              
+                  {% for order_detail in order_details %}
+                  <tr>
+                      <td class="">
+                          <div class="d-flex justify-content-center"><p class="ms-4">{{order_detail.product.title}}</p><img src="{{order_detail.product.image_tumpnail.url}}" alt=""></div>
+                          <div class="ToPersian d-flex justify-content-center mt-2"><p>کد کالا:</p>{{order_detail.product.code}}</div>
+                      </td>
+                      <td class="ToPersian">{{order_detail.count}}</td>
+                      <td class="ToPersian">{{order_detail.product.price}}</td>
+                      <td class="ToPersian">{% widthratio order_detail.count 1 order_detail.product.price %}</td>
+                  </tr>
+                  {% endfor %}
+                  <tr>
+                      <td colspan="2">مجموع قیمت کالا</td>
+                      <td colspan="2" class="ToPersian">{{total_price_ofProduct}} تومان</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2">حمل‌و‌نقل</td>
+                      <td colspan="2" class="ToPersian">{{post_price}} تومان</td>
+                  </tr>
+                  <tr>
+                      <td colspan="2">جمع کل</td>
+                      <td colspan="2" class="ToPersian">{{ post_price|add:total_price_ofProduct }} تومان</td>
+                  </tr>
+              </tbody>
+        </table>
+    </div>
+
+    <div class="send_title mt-5">
+        <span class="">فراموش نکنید شماره سفارش <span class="ToPersian">{{order.id}}</span> خود را در صفحه <a href="{% url 'RegisterPaymentInformation' order.id %}">ثبت اطلاعات پرداخت</a> وارد کنید.</span>
+        <span>
+            ما این اطلاعات را به شما ایمیل کرده ایم.
+        </span>
+    </div>
+</div>
+
+<script src="{% static 'js/cartToCartPeyment_css.js' %}" type="module" ></script>
+<script src="{% static 'js/cartToCartPeyment.js' %}" type="module" ></script>
+
+{% endblock %}
