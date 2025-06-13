@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html dir="rtl">
+  <head lang="fa-IR">
+    
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <meta charset="UTF-8" />
+    <!-- <link rel="stylesheet" href="{{domain}}{% static 'css/cartToCartPeyment.css' %}">
+    <link rel="stylesheet" href="{{domain}}{% static 'css/post_order.css' %}">
+    
+    <link rel="stylesheet" href="{{domain}}{% static 'css/UnpaidOrder.css' %}">
+    
+    <link rel="stylesheet" href="{{domain}}{% static 'css/details_order.css' %}"> -->
+    <title></title>
+  </head>
+  <body style="width: 95%">
+    <div style="width: 100%">
+      <table class="table table-bordered" style="width: 100%">
+        <thead>
+          <tr>
+            <th scope="col">نام کالا</th>
+            <th scope="col">تعداد</th>
+            <th scope="col">قیمت واحد (تومان)</th>
+            <th scope="col">جمع قیمت (تومان)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order_detail in order_details %}
+          <tr>
+            <td class=""  style="text-align: center; vertical-align: middle;"> 
+              <div class="" style="margin: 0; display: flex; justify-content: center;"> <img src="{{domain}}{{order_detail.product.image_tumpnail.url}}" alt="" /> <p>{{order_detail.product.title}}</p> </div>
+              <!-- <div class=""> <p>کد کالا:</p> {{order_detail.product.code}} </div> -->
+            </td>
+            <td class="ToPersian"  style="text-align: center; vertical-align: middle;">{{order_detail.count}}</td>
+            <td class="ToPersian"  style="text-align: center; vertical-align: middle;">{{order_detail.product.price}}</td>
+            <td class="ToPersian"  style="text-align: center; vertical-align: middle;">
+              {% widthratio order_detail.count 1 order_detail.product.price %}
+            </td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <td colspan="2">مجموع قیمت کالا</td>
+            <td colspan="2" class="ToPersian">
+              {{total_price_ofProduct}} تومان
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">حمل‌و‌نقل</td>
+            <td colspan="2" class="ToPersian">{{post_price}} تومان</td>
+          </tr>
+          <tr>
+            <td colspan="2">جمع کل</td>
+            <td colspan="2" class="ToPersian">
+              {{ post_price|add:total_price_ofProduct }} تومان
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

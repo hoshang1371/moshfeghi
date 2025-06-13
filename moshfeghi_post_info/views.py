@@ -551,7 +551,7 @@ def cartToCartPeyment(request):
     return render(request ,'cartToCartPeyment.html',contex)
     
 
-@login_required(login_url='/login')
+# @login_required(login_url='/login')
 def pdf_factor(request,pk):
     # order = Order.objects.filter(owner_id=request.user.id, is_paid=False).first()
     order = Order.objects.filter(owner_id= request.user.id,id=pk)
