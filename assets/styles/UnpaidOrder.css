@@ -1,0 +1,39 @@
+
+
+.right_headerList>div>h6{
+    font-size: 0.8rem;
+    color: var(--black);
+}
+
+
+.right_panelGruop>div>div>a {
+  color: var(--blue)!important;
+  cursor: pointer;
+}
+
+.right_panelGruop>div>div>i {
+    color: var(--blue);
+  /* margin: 0 15px 0 0; */
+  /* font-size: 25px; */
+}
+
+.right_panelGruop a b {
+  vertical-align: baseline;
+  font: 300 18px Open Sans;
+}
+
+.right_panelGruop>div>div:hover a,
+.right_panelGruop>div>div:hover i,
+.right_panelGruop>div:hover>a
+{
+  color: var(--red) !important;
+}
+
+.Left_UnpaidOrders>h2{
+    font: 300 25px Gandom;
+}
+
+td,th {
+  text-align: center;
+  vertical-align: middle;
+}

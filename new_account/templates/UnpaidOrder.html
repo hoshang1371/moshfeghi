@@ -1,0 +1,111 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block content %}
+
+{% load jformat %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="right_listOfFeatures col-sm-3 border-start mt-4">
+            <div class="right_headerList d-flex justify-content-center mt-4 pb-4  border-bottom">
+    
+                <img class="border rounded-circle" src="{% static 'Images/avatar.jpg' %}" alt="Avatar" style="height: 5rem;">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h6>{{user.email}}</h6>                
+                </div>
+            </div>
+    
+            <div class="right_panelGruop mt-2">
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-edit"></i>
+                        <a href="{% url 'editUserProfile' %}">ویرایش اطلاعات</a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <a href="{% url 'changePass' %}"> تغییر پسوورد </a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        <a href="{% url 'user' %}"> سفارشات پرداخت نشده </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <a href="{% url 'historyOrder' %}"> تاریخچه سفارشات </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{% url 'addresses' %}"> آدرس‌ها </a>
+                    </div>
+                </div>
+                <div class="p-2">
+    
+                    <a href="{% url 'log_out' %}"> خروج از حساب </a>
+                </div>
+            </div>
+        </div>
+        <div class="Left_UnpaidOrders col-sm-9">
+            <h2 class="m-4"> سفارشات پرداخت نشده </h2>
+    
+            <div class="m-4">
+                <table class="table table-bordered" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>مرجع سفارش</th>
+                            <th>تاریخ</th>
+                            <th>وضعیت</th>
+                            <th>شماره پیگیری</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+    
+                    {% for order in orders %}
+                    <tr>
+                        <td class="idOrder"><a href="{% url 'editOrder' order.id %}" class="ToPersian idOrder">{{order.id}}</a></td>
+                        <td class="ToPersian">{{order.j_payment_date.date|jformat:"%Y/%m/%d"  }}</td>
+                        
+                        {% if order.is_send is True %}
+                        <td class="ToPersian statusOrder sended">
+                            <p> ارسال شده </p>
+                        </td>
+                        {% else %}
+                        <td class="ToPersian statusOrder notSended">
+                            <p> ارسال نشده </p>
+                        </td>
+                        {% endif %}
+                        {% if order.codeFolowed %}
+                        <td class="ToPersian"><a href="" class="ToPersian idOrder">{{order.codeFolowed}}</a></td>
+                        {% else %}
+                        <td class="ToPersian" style="color: red;">-</td>
+                        {% endif %}
+                        <td >
+                            <div>
+                                <!-- <a href="">سفارش مجدد</a> -->
+                                <a href="{% url 'pdf_factor' order.id %}">فاکتور</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor%}
+    
+    
+                </table>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/UnpaidOrder_css.js' %}" type="module" ></script>
+{% endblock %}

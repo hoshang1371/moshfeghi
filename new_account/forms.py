@@ -7,6 +7,32 @@ from django.contrib.auth.forms import UserCreationForm
 
 from captcha.fields import CaptchaField, CaptchaTextInput
 
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
+
+CHOICES = [('1', 'اقا'), ('2', 'خانم')]
+SAL = (())
+MAH = (
+        ('فروردین' , 'فروردین'),
+        ('اریبهشت' , 'اریبهشت'),
+        ('خرداد' , 'خرداد'),
+        ('تیر' , 'تیر'),
+        ('مرداد' , 'مرداد'),
+        ('شهریور' , 'شهریور'),
+        ('مهر' , 'مهر'),
+        ('آبان' , 'آبان'),
+        ('آذر' , 'آذر'),
+        ('دی' , 'دی'),
+        ('بهمن' , 'بهمن'),
+        ('اسفند' , 'اسفند'),
+    )
+ROZ = (())
+
+for i in range(1300,1500):
+    SAL = SAL + ((f'{i}',f'{i}'),)
+
+for j in range(1,31):
+    ROZ = ROZ + ((f'{j}',f'{j}'),)
+
 class LoginForm(forms.Form):
     email = forms.CharField(
         widget=forms.TextInput(attrs={ 'type':"email",'value':"",'class':'form-control ','id':"customer_email",'size':"30"}),
@@ -18,8 +44,6 @@ class LoginForm(forms.Form):
         label=' کلمه ی عبور '
     )
 
-
-from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 
 class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
@@ -124,3 +148,83 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+
+
+class EditUserForm(forms.Form):
+
+    first_name= forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder':'لطفاً نام  خود را وارد نمایید ', 'class' : 'form-control rtl'}),
+        label=' نام  '
+    )
+
+    last_name= forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder':'لطفاً نام خانوادگی خود را وارد نمایید ', 'class' : 'form-control rtl'}),
+        label=' نام خانوادگی '
+    )
+
+    choice_field = forms.ChoiceField(
+        widget=forms.RadioSelect, 
+        choices=CHOICES,
+        label=' عنوان اجتماعی '
+        )
+
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder':'ایمیل',"class":"form-control rtl"}),
+        label=' ایمیل',
+        validators=[
+            validators.EmailValidator(' ایمیل وارد شده معتبر نمی باشد ')
+        ]
+    )
+
+    SAL = forms.ChoiceField(
+        choices=SAL,
+        widget=forms.Select(attrs={"class":"form-control rtl me-2"}),
+        )
+
+    MAH = forms.ChoiceField(
+        choices=MAH,
+        widget=forms.Select(attrs={"class":"form-control rtl me-2"}),
+        )
+
+    ROZ = forms.ChoiceField(
+        choices=ROZ,
+        widget=forms.Select(attrs={"class":"form-control rtl me-2"}),
+        )
+
+class ChangePass(forms.Form):
+    password_now = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+        label=' گذرواژه فعلی',
+    )
+
+    password_new = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':' رمز عبور جدید',"class":"rtl password"}),
+        label=' رمز عبور جدید ',
+    )
+
+    # password_accept = forms.CharField(
+    #     widget=forms.TextInput(attrs={'placeholder':' تاییدیه ',"class":"rtl"}),
+    #     label=' تاییدیه ',
+    #     validators=[
+    #         validators.EmailValidator(' تاییدیه ')
+    #     ]
+    # )
+
+    password_accept = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder':' تکرار رمز عبور جدید',"class":"rtl password"}),
+        label=' رمز عبور جدید ',
+    )
+
+    def clean_password_accept(self):
+        password_new = self.cleaned_data.get('password_new')
+        password_accept = self.cleaned_data.get('password_accept')
+
+        if password_new != password_accept:
+            raise forms.ValidationError('کلمه های عبور مغایرت دارند')
+        elif (len(password_new) < 4):
+            raise forms.ValidationError('کلمه های عبور باید بیشتر از چهار حرف باشد  ')
+
+
+        return password_new
+

@@ -35,15 +35,26 @@ from django.contrib.auth.models import AbstractUser
 # >>>>>>> 5ec16611e5647a9ff147278dfd78c2a9ecc7f6b2
 
 
-# class UserData(models.Model):
-#     user  = models.OneToOneField(
-#         User ,
-#         on_delete=models.CASCADE,
-#     )
-#     choiceField =models.CharField(blank = True, null = True, max_length=10, verbose_name=' عنوان اجتماعی ')
-#     SAL =models.CharField(blank = True, null = True, max_length=10, verbose_name='سال تولد ')
-#     MAH =models.CharField(blank = True, null = True, max_length=10, verbose_name=' ماه تولد ')
-#     ROZ =models.CharField(blank = True, null = True, max_length=10, verbose_name=' روز تولد ')
+
+# Create your models here.
+class UserData(models.Model):
+    user  = models.OneToOneField(
+        User ,
+        on_delete=models.CASCADE,
+    )
+    choiceField =models.CharField(blank = True, null = True, max_length=10, verbose_name=' عنوان اجتماعی ')
+    SAL =models.CharField(blank = True, null = True, max_length=10, verbose_name='سال تولد ')
+    MAH =models.CharField(blank = True, null = True, max_length=10, verbose_name=' ماه تولد ')
+    ROZ =models.CharField(blank = True, null = True, max_length=10, verbose_name=' روز تولد ')
+
+#order.orderdetail_set.create(product_id=product.id, price=product.price ,count=count)
+    class Meta:
+        verbose_name = ' اطلاعات شخصی کاربران '
+        verbose_name_plural=' اطلاعات شخصی '
+
+    def __str__(self):
+        return self.user.get_full_name()
+
 
 # #order.orderdetail_set.create(product_id=product.id, price=product.price ,count=count)
 #     class Meta:

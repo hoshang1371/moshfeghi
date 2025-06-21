@@ -1,0 +1,109 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %} 
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="right_listOfFeatures col-sm-3 border-start mt-4">
+            <div class="right_headerList d-flex justify-content-center mt-4 pb-4  border-bottom">
+    
+                <img class="border rounded-circle" src="{% static 'Images/avatar.jpg' %}" alt="Avatar" style="height: 5rem;">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h6>{{user.email}}</h6>                
+                </div>
+            </div>
+    
+            <div class="right_panelGruop mt-2">
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-edit"></i>
+                        <a href="{% url 'editUserProfile' %}">ویرایش اطلاعات</a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <a href="{% url 'changePass' %}"> تغییر پسوورد </a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        <a href="{% url 'user' %}"> سفارشات پرداخت نشده </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <a href="{% url 'historyOrder' %}"> تاریخچه سفارشات </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{% url 'addresses' %}"> آدرس‌ها </a>
+                    </div>
+                </div>
+                <div class="p-2">
+    
+                    <a href="{% url 'log_out' %}"> خروج از حساب </a>
+                </div>
+            </div>
+        </div>
+        <div class="Left_UnpaidOrders col-sm-9">
+            
+        <h2 class="m-4"> اطلاعات کاربر </h2>
+
+        <form method="post" novalidate class="m-4">
+            {% csrf_token %}
+            <div class="form-group rdio_button {% if edit_form.choice_field.errors %} errror {% endif %} d-flex justify-content-center align-items-center">
+                <label class="" for="{{ edit_form.choice_field.id_for_label }}">{{ edit_form.choice_field.label }}</label>
+                {{ edit_form.choice_field }}
+                {% for error in edit_form.choice_field.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+            <div class="form-group form_name {% if edit_form.first_name.errors %} errror {% endif %}">
+                {{ edit_form.first_name }} {% for error in edit_form.first_name.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group form_name {% if edit_form.last_name.errors %} errror {% endif %}">
+                {{ edit_form.last_name }} {% for error in edit_form.last_name.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+            <div class="form-group form_name {% if edit_form.email.errors %} errror {% endif %}">
+                {{ edit_form.email }} {% for error in edit_form.email.errors %}
+                <p class="text-danger">{{error}}</p>
+                {% endfor %}
+            </div>
+    
+    
+            <div class="form-group form_name">
+                <label for="">تاریخ تولد</label>
+                <div class="birth_day_content d-flex justify-content-center w-50">
+                    {{ edit_form.ROZ }} 
+                    {{ edit_form.MAH }} 
+                    {{ edit_form.SAL }} 
+                </div>
+            </div>
+    
+            <div class="send-group row d-flex justify-content-center mt-3">
+                <input class=" btn btn-cart" type="submit" value="ارسـال">
+            </div>
+        </form>
+    
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/edit_account_css.js' %}" type="module" ></script>
+<script src="{% static 'js/UnpaidOrder_css.js' %}" type="module" ></script>
+
+{% endblock %}

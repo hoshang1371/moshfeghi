@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'captcha',
     'rest_framework',
+    'django_jalali',
     # 'alluth.socialaccount.providers.google',
 
     "homePage",
@@ -65,6 +66,7 @@ INSTALLED_APPS = [
     "moshfeghi_setting",
     "moshfeghi_order",
     "moshfeghi_post_info",
+    
 ]
 # AUTH_USER_MODEL = 'new_account.User'
 MIDDLEWARE = [

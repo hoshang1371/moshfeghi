@@ -2,7 +2,7 @@ from django.urls import path
 
 from django.contrib.auth import views
 
-from .views import logIn,createAccount,log_out,activate
+from .views import UnpaidOrder, addresses, change_pass, edit_user_profile, editOrder, historyOrder, logIn,createAccount,log_out,activate
 
 from .forms import UserPasswordResetForm, UserSetPasswordForm
 
@@ -32,5 +32,12 @@ urlpatterns += [
         name='password_reset_confirm'),
     path('reset/done/', views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
     path('activate/<slug:uidb64>/<slug:token>/',activate, name='activate'),
+
+    path('user', UnpaidOrder,name='user'),
+    path('addresses', addresses,name='addresses'),
+    path('changePass', change_pass,name='changePass'),
+    path('editOrder/<int:pk>', editOrder,name='editOrder'),
+    path('user/edit', edit_user_profile,name='editUserProfile'),
+    path('historyOrder', historyOrder,name='historyOrder'),
 
 ]

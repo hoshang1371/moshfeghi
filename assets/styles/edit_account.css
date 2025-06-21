@@ -1,0 +1,27 @@
+.send-group>input{
+    color: var(--white1);
+    max-width: 7rem;
+}
+
+h2 {
+    font: 300 25px Gandom;
+}
+
+#id_choice_field{
+    display: flex;
+    justify-content: center;
+    margin-right: 2rem;
+}
+
+#id_choice_field>div{
+    margin-right: 2rem;
+    font-size: 1rem;
+}
+
+#id_choice_field>div>label,
+.rdio_button>label,
+label
+{
+    font-size: 0.9rem!important;
+    color: var(--black);
+}
