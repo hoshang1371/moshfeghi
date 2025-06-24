@@ -243,7 +243,7 @@ def change_pass(request):
             'change_pass' : change_pass,
             }
                                         
-        return render(request,'account/change_pass.html', contex)
+        return render(request,'change_pass.html', contex)
 
 
 def activate(request, uidb64, token):

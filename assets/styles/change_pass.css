@@ -1,0 +1,12 @@
+.send-group>input{
+    color: var(--white1);
+    max-width: 7rem;
+}
+
+.send-group>input:hover{
+    color: var(--white1);
+}
+
+.show{
+    cursor: pointer;
+}

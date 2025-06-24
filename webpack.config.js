@@ -13,6 +13,7 @@ module.exports ={
       './add_post_address':'./assets/scripts/add_post_address.js',
       './paymentMethod':'./assets/scripts/paymentMethod.js',
       './cartToCartPeyment':'./assets/scripts/cartToCartPeyment.js',
+      './change_pass':'./assets/scripts/change_pass.js',
       
       './post_order_css':'./assets/styles/post_order.css',
       './add_post_address_css':'./assets/styles/add_post_address.css',
@@ -22,6 +23,7 @@ module.exports ={
       './RegisterPaymentInformation_css':'./assets/styles/RegisterPaymentInformation.css',
       './UnpaidOrder_css':'./assets/styles/UnpaidOrder.css',
       './edit_account_css':'./assets/styles/edit_account.css',
+      './change_pass_css':'./assets/styles/change_pass.css',
     },
     output: {
         // publicPath:'http://127.0.0.1:8080/',

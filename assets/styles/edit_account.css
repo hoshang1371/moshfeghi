@@ -3,6 +3,10 @@
     max-width: 7rem;
 }
 
+.send-group>input:hover{
+    color: var(--white1);
+}
+
 h2 {
     font: 300 25px Gandom;
 }

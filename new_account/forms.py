@@ -194,12 +194,12 @@ class EditUserForm(forms.Form):
 
 class ChangePass(forms.Form):
     password_now = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"rtl password"}),
+        widget=forms.PasswordInput(attrs={'placeholder':'گذرواژه فعلی',"class":"form-control rtl password"}),
         label=' گذرواژه فعلی',
     )
 
     password_new = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':' رمز عبور جدید',"class":"rtl password"}),
+        widget=forms.PasswordInput(attrs={'placeholder':' رمز عبور جدید',"class":"form-control rtl password"}),
         label=' رمز عبور جدید ',
     )
 
@@ -212,7 +212,7 @@ class ChangePass(forms.Form):
     # )
 
     password_accept = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder':' تکرار رمز عبور جدید',"class":"rtl password"}),
+        widget=forms.PasswordInput(attrs={'placeholder':' تکرار رمز عبور جدید',"class":"form-control rtl password"}),
         label=' رمز عبور جدید ',
     )
 
