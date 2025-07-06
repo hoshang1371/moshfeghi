@@ -1,0 +1,148 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div id="main" role="main">
+    <div class="container">
+      <div class="row sidebar_right sidebar_off">
+        <div class="column_center">
+          <div id="main_content" class="col-sm-12">
+            <div class="index-scope">
+              <div class="OrderContent">
+                <div class="row">
+
+                    <div class="col-sm-12">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                    
+                            <div class="row header_add_post_order">
+                                <h2 class="col">نشانی ارسال</h2>
+                            </div>
+                            <div class="khat"></div>
+                        
+                            <div class="field">
+                                <div class=""><span class="	fas fa-user-alt"></span></div>
+                                {{ add_address.first_name_for_post }}
+                            </div>
+                        
+                            <div class="field">
+                                <div class=""><span class="fas fa-user-check"></span></div>
+                                {{ add_address.last_name_for_post }}
+                            </div>
+                        
+                            <div class="field">
+                                <div class="country">
+                                    <span class="fas fa-flag "></span>
+                                    <!-- <h2>کشور</h2> -->
+                                </div>
+                                {{ add_address.Country_for_post }}
+                            </div>
+                        
+                            <div class="field">
+                                <div class=""><span class="fas fa-city "></span></div>
+                                {{ add_address.City_for_post }}
+                            </div>
+                        
+                            <div class="field">
+                                <div class=""><span class="	fas fa-address-card "></span></div>
+                                {{ add_address.Address_for_post }}
+                            </div>
+                        
+                            <div class="field">
+                                <div class=""><span class="fas fa-phone "></span></div>
+                                {{ add_address.phone_number_for_post }}
+                            </div>
+                        
+                            {% for error in add_address.phone_number_for_post.errors %}
+                            <p style="color:red; ">{{error}}</p>
+                            {% endfor %}
+                        
+                            <div class="field">
+                                <div class=""><span class="fas fa-mobile-alt"></span></div>
+                                {{ add_address.mobile_phone_number_for_post }}
+                            </div>
+                        
+                            {% for error in add_address.mobile_phone_number_for_post.errors %}
+                            <p style="color:red; ">{{error}}</p>
+                            {% endfor %}
+                        
+                            <div class="varifyMobile">
+                                <div class="field">
+                                    <div class=""><span class="fas fa-check"></span></div>
+                                    {{ add_address.check_mobile_phone_number_for_post }}
+                                </div>
+                                <!-- <p class="countdownTimerDisplayNone"></p> -->
+                                 <div class="buttonEdite d-flex flex-column justify-content-center align-items-center">
+                                    <p class="ToPersian">2:00</p>
+                                    <span class="btn btn-success ">ارسال کد تایید</span>
+                                 </div>
+                            </div>
+                        
+                            {% for error in add_address.check_mobile_phone_number_for_post.errors %}
+                            <p style="color:red; ">{{error}}</p>
+                            {% endfor %}
+                        
+                            <div class="field">
+                                <div class=""><span class="fa fa-map-pin"></span></div>
+                                {{ add_address.post_code_for_post }}
+                            </div>
+                            <div class=" d-flex justify-content-evenly mt-5">
+                                <div class="field-sabt w-25">
+                                    <input class="btn btn-cart w-100" type="submit" value="ادامه">
+                                </div>
+                            
+                                <div class="field_cancel w-25">
+                                    <a href="{% url 'addresses' %}" class="w-100 h-100 d-flex justify-content-center align-items-center">
+                                        <span class="fas fa-window-close ms-2"></span>
+                                        <h1 href="">انصراف</h1>
+                                    </a>
+                                </div>
+                            </div>
+                        
+                        </form>
+                    </div>
+
+
+
+                    <!-- <div class="orderPrice col-sm-3">
+                      <h3 class="ToPersian">{{count_off_all_product}} کالا در سبد خرید شما</h3>
+                      <div>
+                        <div>
+                          <label>جمع کالا ها</label>
+                          <span class="totla_price ToPersian">{{Total_price_for_all_product_buy}}‎ تومان</span>
+                        </div>
+                        <div>
+                          <label>هزینه بسته بندی</label>
+                          <span class="ToPersian sendPrice">{{post_price}}‎ تومان</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div>
+                          <label>مجموع </label>
+                          <span class="total ToPersian">{{Total_price_for_all_product_buy|add:post_price}}‎ تومان</span>
+                        </div>
+                        <input class="continue btn btn-cart" type="submit" value="ادامه">
+                      </div>
+                    </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+                   
+
+
+
+
+
+
+<script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
+<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>
+<script src="{% static 'js/add_post_address_css.js' %}" type="module" ></script>
+<script src="{% static 'js/add_post_address.js' %}" type="module" ></script>
+{% endblock %}

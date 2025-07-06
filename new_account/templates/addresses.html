@@ -1,0 +1,134 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="right_listOfFeatures col-sm-3 border-start mt-4">
+            <div class="right_headerList d-flex justify-content-center mt-4 pb-4  border-bottom">
+    
+                <img class="border rounded-circle" src="{% static 'Images/avatar.jpg' %}" alt="Avatar" style="height: 5rem;">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <p> {{user.first_name}} {{user.last_name}} </p>
+                    <h6>{{user.email}}</h6>                
+                </div>
+            </div>
+    
+            <div class="right_panelGruop mt-2">
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-edit"></i>
+                        <a href="{% url 'editUserProfile' %}">ویرایش اطلاعات</a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                        <a href="{% url 'changePass' %}"> تغییر پسوورد </a>
+                    </div>
+                </div>
+    
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-ban" aria-hidden="true"></i>
+                        <a href="{% url 'user' %}"> سفارشات پرداخت نشده </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                        <a href="{% url 'historyOrder' %}"> تاریخچه سفارشات </a>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <a href="{% url 'addresses' %}"> آدرس‌ها </a>
+                    </div>
+                </div>
+                <div class="p-2">
+    
+                    <a href="{% url 'log_out' %}"> خروج از حساب </a>
+                </div>
+            </div>
+        </div>
+        <div class="Left_UnpaidOrders col-sm-9">
+            <h2 class="m-4"> آدرس‌ها </h2>
+    
+            <div class="m-4">
+                 <div class="postList row row-cols-sm-2">
+                    {% for postAddressUser in postAddressesUser %}
+                    <div class="postDetails col">
+                        <div class="pDTop">
+                            <div>
+                                <span>نشانی من</span>
+                            </div>
+                            <div>
+                                <input type="hidden" value="{{postAddressUser.id}}">
+                                <p class="EditePost">ویرایش</p>
+                                <span>|</span>
+                                <p class="DeletePostAdress">حذف</p>
+                            </div>
+                        </div>
+
+                        <div class="pDBottom">
+                            <div class="" style="overflow: hidden;">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <a class="ToPersian">
+                                    <p>       
+                                    {{postAddressUser.get_country_display}}
+                                </p>
+                                <span>،</span>
+                                <p>       
+                                    {{postAddressUser.city}}
+                                </p>
+                                <span>،</span>
+                                <p class="ToPersian">       
+                                    {{postAddressUser.address}}
+                                </p>
+                                </a>
+                            </div>
+                            <div>
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <a>
+                                <span>{{postAddressUser.firstName}}</span>
+                                <span>{{postAddressUser.lastName}}</span> 
+                                </a>
+                            </div>
+                            <div>
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <a class="ToPersian">{{postAddressUser.post_code}}</a>
+                            </div>
+                            <div>
+                                <i class="fa fa-mobile" aria-hidden="true"></i>
+                                <a class="ToPersian">{{postAddressUser.mobile_phone_number}}</a>
+                            </div>
+                            <div>
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <a class="ToPersian">{{postAddressUser.phone_number}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row update">
+                    <button class="btn btn-success buttonEdite" type="button"> افزودن آدرس جدید </button>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/UnpaidOrder_css.js' %}" type="module" ></script>
+
+
+<script src="{% static 'js/list_of_buy_css.js' %}" type="module" ></script>
+
+<script src="{% static 'js/post_order_css.js' %}" type="module" ></script>
+
+<script src="{% static 'js/addresses.js' %}" type="module" ></script>
+{% endblock %}

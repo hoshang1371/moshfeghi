@@ -136,7 +136,7 @@ def historyOrder(request):
         'orders':orders,
         'user' : user[0]
     }
-    return render(request, 'account/HistoryOrder.html',context)
+    return render(request, 'HistoryOrder.html',context)
 
 @login_required(login_url='/login')
 def addresses(request):
@@ -147,7 +147,7 @@ def addresses(request):
         'postAddressesUser' : postAddressesUser,
         'user' : user[0]
     }
-    return render(request, 'account/addresses.html',context)
+    return render(request, 'addresses.html',context)
 
 from django.http.response import Http404
 from django.core.exceptions import ObjectDoesNotExist, ValidationError

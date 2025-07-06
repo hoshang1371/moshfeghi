@@ -14,6 +14,7 @@ module.exports ={
       './paymentMethod':'./assets/scripts/paymentMethod.js',
       './cartToCartPeyment':'./assets/scripts/cartToCartPeyment.js',
       './change_pass':'./assets/scripts/change_pass.js',
+      './addresses':'./assets/scripts/addresses.js',
       
       './post_order_css':'./assets/styles/post_order.css',
       './add_post_address_css':'./assets/styles/add_post_address.css',
