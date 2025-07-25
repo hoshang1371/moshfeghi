@@ -27,7 +27,14 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#python manage.py runserver 192.168.1.52:8000
+
+
+ALLOWED_HOSTS = [
+    '192.168.1.52',
+    # 'http://127.0.0.1:8000/',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -53,7 +60,10 @@ INSTALLED_APPS = [
     'bootstrap5',
     'fontawesomefree',
     'captcha',
+
     'rest_framework',
+    'rest_framework.authtoken',
+    
     'django_jalali',
     # 'alluth.socialaccount.providers.google',
 
@@ -66,6 +76,9 @@ INSTALLED_APPS = [
     "moshfeghi_setting",
     "moshfeghi_order",
     "moshfeghi_post_info",
+
+
+    "restFlatterAppStaff",
     
 ]
 # AUTH_USER_MODEL = 'new_account.User'
@@ -216,10 +229,26 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_LOGIN_METHODS = {'email'}
 
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         # 'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         # 'rest_framework.authentication.TokenAuthentication',
+#     ]
+# }
+
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'restFlatterAppStaff.permissions.IsStaffOrReadOnly',
+        
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
+        #'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        #jwt
+        #knox
+        #oauth
     ]
 }

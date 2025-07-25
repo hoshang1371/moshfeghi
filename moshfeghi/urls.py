@@ -40,6 +40,8 @@ urlpatterns = [
     path('order/',include('moshfeghi_order.urls')),
     path('post_info/',include('moshfeghi_post_info.urls')),
 
+    path('api/',include('restFlatterAppStaff.urls')),
+
 ]
 
 urlpatterns += [
