@@ -119,8 +119,11 @@
 
                          </div>
                         <!-- <input class="ToPersianValue input_off_number_product_item" min="1" value={{order_partial_buy.count}}> -->
- 
+                        {% if  request.user.is_authenticated %}
                         <button class="btn btn-cart" type="submit" id="add-to-cart">خرید</button>
+                        {% else %}
+                        <a class="btn btn-cart notAuth" style="width: auto; height: 37px; vertical-align: middle;  color: var(--white2); font-family: Gandom;">خرید</a>
+                        {% endif %}
                       </div>
       
                     </div><!-- /.options -->

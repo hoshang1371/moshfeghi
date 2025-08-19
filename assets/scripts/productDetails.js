@@ -7,6 +7,13 @@ const csrftoken = getCookie('csrftoken');
 // console.log(csrftoken)
 let product_id = document.querySelector('.product-scope>input');
 // !==============================
+let notAuth = document.querySelector('.notAuth')
+if(notAuth != null){
+    notAuth.addEventListener('click',function(){
+        popup_warning(3000,"لطفاً وارد شوید");
+    })
+}
+// !==============================
 let numberToPersianValue = document.querySelectorAll('.ToPersianValue');
 
 let BCup = document.querySelector('.BCup');
@@ -134,10 +141,11 @@ as_Comment.querySelector("button").addEventListener("click",function(){
 
 //!=========================likeComment===================
 
-let likeComments = document.querySelectorAll(".voting-icons>svg")
-
+let likeComments = document.querySelectorAll(".voting-icons>.svgAuth  ")
+// console.log(likeComments)
 likeComments.forEach(likeComment=>{
     likeComment.addEventListener("click",function(){
+    
         // console.log(likeComment.parentElement.querySelector("input").value)
         let comment_id = likeComment.parentElement.querySelector("input").value
         let likeds= likeComment.parentElement.querySelectorAll("svg")
@@ -164,6 +172,7 @@ likeComments.forEach(likeComment=>{
             }
         });
     })
+    //!
     // let svgIcon = likeComment.querySelector("svg")
     // svgIcon.addEventListener("click",function(){
     //     console.log(svgIcon)

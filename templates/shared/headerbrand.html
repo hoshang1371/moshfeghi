@@ -110,9 +110,11 @@
           </div>
           <div class="header_cart">
             <a>    
+              {% if request.user.is_authenticated %}
               <i class="fa-solid fa-cart-shopping"></i>
               <span class="cart-total-items"><span class="count ToPersian">{{totalCount}}</span></span>
               <span>عدد</span>
+              {% endif %}
             </a>
           </div>
         </div>
